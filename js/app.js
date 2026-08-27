@@ -24,7 +24,7 @@ function initDynamicWordSwitcher() {
   const dynamicWordEl = document.getElementById('dynamic-word');
   if (!dynamicWordEl) return;
 
-  const words = ['Casa', 'Finca', 'Vehículo', 'Patrimonio'];
+  const words = ['Patrimonio', 'Casa', 'Finca', 'Vehículo', 'Inversión'];
   let index = 0;
 
   setInterval(() => {
