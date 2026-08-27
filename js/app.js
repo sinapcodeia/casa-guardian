@@ -223,11 +223,31 @@ window.handleOwnerRegister = async function(e) {
   const zone = zoneInput?.value || 'Pasto Urbano';
   const type = typeInput?.value || 'Casa Residencial';
 
-  // 1. Validación estricta de formato de correo electrónico
+  // Validación exhaustiva de esquema de datos (Patrón Zod / Schema-First)
+  const cleanPhone = rawPhone.replace(/\s+/g, '');
+  const phoneValid = /^(\+?57)?3\d{9}$/.test(cleanPhone);
   const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
-  if (!emailRegex.test(rawEmail)) {
-    alert("⚠️ Correo Electrónico Inválido\n\nPor favor ingrese un correo válido (ejemplo: carlos.gomez@gmail.com).");
-    if (emailInput) emailInput.focus();
+  const termsChecked = document.getElementById('reg-terms-check')?.checked;
+
+  const validationErrors = [];
+  if (!rawName || rawName.length < 3) {
+    validationErrors.push("• Nombre completo obligatorio (mínimo 3 caracteres).");
+  }
+  if (!phoneValid) {
+    validationErrors.push("• WhatsApp inválido. Ingrese un número móvil de Colombia válido (+57 300 000 0000 o 3001234567).");
+  }
+  if (!rawEmail || !emailRegex.test(rawEmail)) {
+    validationErrors.push("• Correo electrónico inválido (ej: usuario@dominio.com).");
+  }
+  if (!rawLocation || rawLocation.length < 2) {
+    validationErrors.push("• Ciudad o país donde reside es requerido.");
+  }
+  if (!termsChecked) {
+    validationErrors.push("• Debe aceptar expresamente el Protocolo Notarial y la Política de Privacidad.");
+  }
+
+  if (validationErrors.length > 0) {
+    alert("⚠️ Errores en el Formulario de Registro:\n\n" + validationErrors.join("\n"));
     return;
   }
 

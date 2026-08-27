@@ -1,4 +1,4 @@
-﻿/**
+/**
  * ============================================================================
  * CASA GUARDIAN — GOOGLE APPS SCRIPT BACKEND (DRIVE STORAGE & GMAIL NOTIFIER)
  * ============================================================================
@@ -65,6 +65,26 @@ function doPost(e) {
       })).setMimeType(ContentService.MimeType.JSON);
     }
 
+    if (action === "SELLO_INSPECCION_OFICIAL") {
+      var inspection = data.inspection;
+      var rawString = JSON.stringify({
+        inmuebleId: inspection.inmuebleId,
+        oficial: inspection.officerName,
+        gps: inspection.gps,
+        checklist: inspection.checklist,
+        timestamp: new Date().toISOString()
+      });
+
+      var serverSHA256 = computeSHA256Hex(rawString);
+
+      return ContentService.createTextOutput(JSON.stringify({
+        status: "success",
+        sha256: serverSHA256,
+        timestamp: new Date().toISOString(),
+        verified: true
+      })).setMimeType(ContentService.MimeType.JSON);
+    }
+
     return ContentService.createTextOutput(JSON.stringify({ status: "ok" })).setMimeType(ContentService.MimeType.JSON);
 
   } catch (error) {
@@ -73,4 +93,17 @@ function doPost(e) {
       message: error.toString()
     })).setMimeType(ContentService.MimeType.JSON);
   }
+}
+
+function computeSHA256Hex(text) {
+  var digest = Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, text, Utilities.Charset.UTF_8);
+  var hex = "";
+  for (var i = 0; i < digest.length; i++) {
+    var byteVal = digest[i];
+    if (byteVal < 0) byteVal += 256;
+    var str = byteVal.toString(16);
+    if (str.length === 1) str = "0" + str;
+    hex += str;
+  }
+  return hex;
 }
