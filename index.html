@@ -213,7 +213,7 @@
         playsinline 
         muted 
         preload="auto"
-        poster="img/hero-villa.jpg"
+        poster="img/hero-villa.webp"
         aria-hidden="true"
       >
         <source src="media/casa.mp4" type="video/mp4">
@@ -378,7 +378,10 @@
         <!-- Card 2: Care Vehicular (Span 5) CON CAMIONETA DE LUJO EN PAISAJE ANDINO SIN BARCOS -->
         <article class="bento-card col-span-1 md:col-span-5 bento-card-light flex flex-col justify-between group">
           <div class="bento-card-header relative h-64 overflow-hidden rounded-t-2xl">
-            <img class="bento-card-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Camioneta y Cuidado Vehicular en Garaje Privado Nariño" loading="lazy" decoding="async" src="img/camioneta-lujo.jpg"/>
+            <picture>
+              <source srcset="img/camioneta-lujo.webp" type="image/webp">
+              <img class="bento-card-img w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" alt="Camioneta y Cuidado Vehicular en Garaje Privado Nariño" width="800" height="500" loading="lazy" decoding="async" src="img/camioneta-lujo.jpg"/>
+            </picture>
             <div class="bento-hud-overlay">
               <span class="hud-badge">🚗 VEHICLE CARE</span>
               <div class="hud-telemetry-tag">
@@ -1544,7 +1547,10 @@
        ========================================================================== -->
   <div class="concierge-trigger" onclick="toggleConciergeDrawer()" aria-label="Hablar con Asesora de Custodia 24/7">
     <div class="concierge-avatar-pulse">
-      <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover rounded-full">
+      <picture>
+        <source srcset="img/concierge-woman.webp" type="image/webp">
+        <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" width="48" height="48" class="w-full h-full object-cover rounded-full" loading="lazy" decoding="async">
+      </picture>
     </div>
     <div class="flex flex-col text-left">
       <span class="text-xs font-extrabold text-white leading-tight">Asesora Virtual</span>
@@ -1560,11 +1566,14 @@
     <div class="concierge-header">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full border-2 border-amber-400 overflow-hidden shadow-md shrink-0">
-          <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover">
+          <picture>
+            <source srcset="img/concierge-woman.webp" type="image/webp">
+            <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" width="40" height="40" class="w-full h-full object-cover" loading="lazy" decoding="async">
+          </picture>
         </div>
         <div>
           <h4 class="text-sm font-extrabold text-white">Sofía · Custodia Casa Guardian</h4>
-          <p class="text-[11px] text-slate-300">Asesora Especialista & Emergencias</p>
+          <p class="text-[11px] text-slate-300">Asesora de Custodia &amp; Novedades</p>
         </div>
       </div>
       <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="toggleConciergeDrawer()" aria-label="Cerrar">&times;</button>
