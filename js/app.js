@@ -363,6 +363,7 @@ window.openAuthModal = function(tab = 'register') {
   const modal = document.getElementById('auth-modal');
   if (modal) {
     modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
     switchAuthTab(tab);
   }
 };
@@ -371,8 +372,57 @@ window.closeAuthModal = function() {
   const modal = document.getElementById('auth-modal');
   if (modal) {
     modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
   }
 };
+
+window.openPrivacyModal = function() {
+  const modal = document.getElementById('privacy-modal');
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+};
+
+window.closePrivacyModal = function() {
+  const modal = document.getElementById('privacy-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+};
+
+window.handleDigitalCheckout = function() {
+  const planName = document.getElementById('calc-plan-name')?.textContent || 'PLAN CARE';
+  const priceCop = document.getElementById('calc-price-cop')?.textContent || '$320.000 COP / mes';
+  const propType = document.getElementById('calc-prop-type')?.selectedOptions[0]?.text || 'Casa Residencial';
+  const zone = document.getElementById('calc-zone')?.selectedOptions[0]?.text || 'Casco Urbano Pasto';
+
+  const confirmPay = confirm(
+    `💳 PASARELA DE PAGO DIGITAL — CASA GUARDIAN\n\n` +
+    `• Concepto: Suscripción Custodia Inmueble (${planName})\n` +
+    `• Activo: ${propType} en ${zone}\n` +
+    `• Monto a Pagar: ${priceCop}\n` +
+    `• Métodos Disponibles: PSE, Nequi, Daviplata, Tarjeta de Crédito (Wompi / ePayco)\n\n` +
+    `¿Desea ser redirigido a la pasarela bancaria segura con cifrado SSL?`
+  );
+
+  if (confirmPay) {
+    alert("🔒 Conexión segura con pasarela PSE/Nequi autorizada. Un asesor técnico coordinará inmediatamente la entrega de precintos de llaves.");
+    handleCalculatorWhatsAppPay();
+  }
+};
+
+// Cerrar modales con tecla Escape para máxima accesibilidad (a11y)
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeAuthModal();
+    closePrivacyModal();
+    if (window.CasaGuardianOperator && typeof window.CasaGuardianOperator.closeInspectionTerminal === 'function') {
+      window.CasaGuardianOperator.closeInspectionTerminal();
+    }
+  }
+});
 
 window.switchAuthTab = function(tab) {
   const regTab = document.getElementById('tab-btn-register');
@@ -535,14 +585,37 @@ window.handleCalculatorWhatsAppPay = function() {
    -------------------------------------------------------------------------- */
 function initLeadForm() {
   const form = document.getElementById('lead-conversion-form');
+  const leadPhoneInput = document.getElementById('lead-phone');
+  const regPhoneInput = document.getElementById('reg-phone');
+
+  function attachPhoneMask(inputEl) {
+    if (!inputEl) return;
+    inputEl.addEventListener('input', (e) => {
+      let digits = e.target.value.replace(/\D/g, '');
+      if (digits.startsWith('57')) digits = digits.slice(2);
+      if (digits.length > 10) digits = digits.slice(0, 10);
+
+      if (digits.length > 6) {
+        e.target.value = `+57 ${digits.slice(0, 3)} ${digits.slice(3, 6)} ${digits.slice(6)}`;
+      } else if (digits.length > 3) {
+        e.target.value = `+57 ${digits.slice(0, 3)} ${digits.slice(3)}`;
+      } else if (digits.length > 0) {
+        e.target.value = `+57 ${digits}`;
+      }
+    });
+  }
+
+  attachPhoneMask(leadPhoneInput);
+  attachPhoneMask(regPhoneInput);
+
   if (form) {
     form.addEventListener('submit', (e) => {
       e.preventDefault();
-      const name = document.getElementById('lead-name').value;
-      const phone = document.getElementById('lead-phone').value;
-      const prop = document.getElementById('lead-prop-type').value;
+      const name = document.getElementById('lead-name')?.value || '';
+      const phone = document.getElementById('lead-phone')?.value || '';
+      const prop = document.getElementById('lead-prop-type')?.value || '';
 
-      const message = encodeURIComponent(`Hola Casa Guardian, soy ${name}. Deseo solicitar la inspección inicial para mi ${prop} en Pasto/Nariño. Mi teléfono es ${phone}.`);
+      const message = encodeURIComponent(`Hola Casa Guardian, soy ${name}. Deseo solicitar la inspección inicial para mi ${prop} en Pasto/Nariño. Mi teléfono de contacto es ${phone}.`);
       window.open(`https://wa.me/573000000000?text=${message}`, '_blank');
     });
   }

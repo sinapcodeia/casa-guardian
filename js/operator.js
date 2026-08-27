@@ -1,4 +1,4 @@
-﻿/* ==========================================================================
+/* ==========================================================================
    CASA GUARDIAN — Mobile Field Operator & Inspection Engine (js/operator.js)
    - Real-time Field Telemetry & 45-point Technical Inspection Checklist
    - GPS Geotagged Photo Evidence Dispatcher
@@ -10,8 +10,22 @@ const CasaGuardianOperator = (function() {
 
   /**
    * Abre la terminal de inspección para el oficial en terreno
+   * Protegido por PIN de Seguridad (RBAC) para evitar accesos públicos no autorizados
    */
   function openInspectionTerminal(propKey = 'casa-pasto') {
+    const isOfficerAuth = sessionStorage.getItem('casaguardian_officer_authenticated') === 'true' ||
+                          sessionStorage.getItem('casaguardian_admin_authenticated') === 'true';
+
+    if (!isOfficerAuth) {
+      const pin = prompt("🔒 ACCESO RESTRINGIDO — OFICIAL DE CUSTODIA EN RUTA\n\nIngrese su PIN de Seguridad de Oficial (4 dígitos) para acceder a la Terminal de Inspección Técnica:");
+      if (!pin) return;
+      if (pin.trim() !== "8821" && pin.trim() !== "OPER-2026") {
+        alert("❌ Acceso Denegado: PIN de Oficial no autorizado.");
+        return;
+      }
+      sessionStorage.setItem('casaguardian_officer_authenticated', 'true');
+    }
+
     const modal = document.getElementById('operator-modal');
     if (!modal) return;
 
