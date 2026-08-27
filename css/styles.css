@@ -59,6 +59,71 @@
   padding: 0;
 }
 
+img, video, svg {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ==========================================================================
+   RESGUARDOS ESTRUCTURALES DE LOGOTIPO & AVATARES (ZERO LAYOUT SHIFT / ZERO FOUC)
+   ========================================================================== */
+.brand-logo-icon,
+.brand-logo .brand-icon-box {
+  width: 48px !important;
+  height: 48px !important;
+  min-width: 48px !important;
+  min-height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  background: #08182B !important;
+  border: 1px solid rgba(212, 175, 55, 0.6) !important;
+  flex-shrink: 0 !important;
+}
+
+.brand-logo-icon img,
+.brand-logo img,
+.brand-icon-box img {
+  width: 44px !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
+  object-fit: contain !important;
+  display: block !important;
+}
+
+.modal-logo-box,
+.auth-modal-logo,
+.admin-logo-box {
+  width: 56px !important;
+  height: 56px !important;
+  min-width: 56px !important;
+  min-height: 56px !important;
+  max-width: 56px !important;
+  max-height: 56px !important;
+  border-radius: 16px !important;
+  overflow: hidden !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  margin: 0 auto !important;
+}
+
+.modal-logo-box img,
+.auth-modal-logo img,
+.admin-logo-box img {
+  width: 48px !important;
+  height: 48px !important;
+  max-width: 48px !important;
+  max-height: 48px !important;
+  object-fit: contain !important;
+}
+
 html {
   font-family: var(--font-main);
   font-size: 16px;
