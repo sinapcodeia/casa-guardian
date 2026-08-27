@@ -107,7 +107,7 @@
     <div class="nav-container">
 
       <!-- IDENTIDAD CORPORATIVA CON ISOTIPO OFICIAL DESTACADO -->
-      <a href="#" class="brand-logo flex items-center gap-3.5 group" aria-label="Casa Guardian Inicio">
+      <a href="javascript:void(0)" onclick="window.scrollTo({top:0, behavior:'smooth'});" class="brand-logo flex items-center gap-3.5 group" aria-label="Casa Guardian Inicio">
         <div class="h-12 w-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0 overflow-hidden">
           <img src="img/favicon.jpg" alt="Casa Guardian Isotipo" class="w-full h-full object-contain scale-115 group-hover:scale-125 transition-transform duration-300">
         </div>
@@ -638,31 +638,31 @@
           <!-- MENÚ DE NAVEGACIÓN PORTAL 100% DINÁMICO & INTERACTIVO -->
           <ul class="flex flex-col gap-1.5 mt-6 text-xs font-semibold" id="dash-tabs-menu">
             <li>
-              <a href="#" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 bg-amber-500/15 text-amber-300 border border-amber-500/30 rounded-xl font-bold transition-all" data-tab-section="sec-telemetry">
+              <a href="javascript:void(0)" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 bg-amber-500/15 text-amber-300 border border-amber-500/30 rounded-xl font-bold transition-all" data-tab-section="sec-telemetry">
                 <span class="material-symbols-outlined text-base">dashboard</span>
                 <span>Telemetría de Propiedad</span>
               </a>
             </li>
             <li>
-              <a href="#" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-gallery">
+              <a href="javascript:void(0)" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-gallery">
                 <span class="material-symbols-outlined text-base">photo_library</span>
                 <span>Galería de Inspecciones</span>
               </a>
             </li>
             <li>
-              <a href="#" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-bodega">
+              <a href="javascript:void(0)" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-bodega">
                 <span class="material-symbols-outlined text-base">inventory_2</span>
                 <span>Bodega & Documentos</span>
               </a>
             </li>
             <li>
-              <a href="#" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-certificates">
+              <a href="javascript:void(0)" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-certificates">
                 <span class="material-symbols-outlined text-base">verified</span>
                 <span>Certificados SHA-256</span>
               </a>
             </li>
             <li>
-              <a href="#" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-repairs">
+              <a href="javascript:void(0)" class="dash-nav-tab flex items-center gap-3 px-3.5 py-3 text-slate-300 hover:bg-slate-800 rounded-xl transition-all" data-tab-section="sec-repairs">
                 <span class="material-symbols-outlined text-base">handyman</span>
                 <span>Aprobación Reparaciones</span>
               </a>
@@ -1446,7 +1446,7 @@
 
   <!-- BARRA DE NAVEGACIÓN FLOTANTE MÓVIL (ERGONOMÍA DE 1 SOLA MANO) -->
   <nav class="mobile-bottom-nav">
-    <a href="#" class="mobile-nav-item active view-btn" data-view="view-landing">
+    <a href="javascript:void(0)" onclick="window.switchAppView('view-landing'); window.scrollTo({top:0, behavior:'smooth'});" class="mobile-nav-item active view-btn" data-view="view-landing">
       <span class="material-symbols-outlined">home</span>
       <span>Inicio</span>
     </a>
@@ -1454,7 +1454,7 @@
       <span class="material-symbols-outlined">grid_view</span>
       <span>Servicios</span>
     </a>
-    <a href="#" class="mobile-nav-item" onclick="handlePortalClientClick(); return false;">
+    <a href="javascript:void(0)" class="mobile-nav-item" onclick="handlePortalClientClick(); return false;">
       <span class="material-symbols-outlined">space_dashboard</span>
       <span>Portal</span>
     </a>
