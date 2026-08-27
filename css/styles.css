@@ -5,16 +5,16 @@
    ========================================================================== */
 
 :root {
-  /* PALETA DE LUJO EDITORIAL & CUSTODIA */
+  /* PALETA DE LUJO EDITORIAL & CUSTODIA (NATIVE LUXURY DARK THEME) */
   --color-marfil: #F3F0E8;
   --color-tinta: #11110F;
   --color-coral: #FF6E54;
   --color-oro: #D4AF37;
   
-  --navy-darker: #0B0B09;
-  --navy-dark: #11110F;
-  --navy-base: #181815;
-  --navy-light: #242420;
+  --navy-darker: #040D1A;
+  --navy-dark: #061325;
+  --navy-base: #091E36;
+  --navy-light: #0E2A4D;
 
   --gold-base: #D4AF37;
   --gold-light: #F3E5AB;
@@ -27,14 +27,14 @@
   --emerald-success: #10B981;
   --emerald-light: #34D399;
 
-  --bg-page: #F3F0E8;
-  --bg-surface: #FFFFFF;
-  --bg-subtle: #EBE7DE;
-  --border-color: rgba(17, 17, 15, 0.12);
+  --bg-page: #061325;
+  --bg-surface: #091E36;
+  --bg-subtle: #0B2440;
+  --border-color: rgba(255, 255, 255, 0.12);
 
   /* FUENTES EDITORIALES */
-  --font-main: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Cormorant Garamond', Georgia, serif;
+  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --shadow-sm: 0 2px 8px rgba(17, 17, 15, 0.04);
@@ -127,8 +127,8 @@ img, video, svg {
 html {
   font-family: var(--font-main);
   font-size: 16px;
-  color: #0F172A;
-  background-color: var(--bg-page);
+  color: #F8FAFC !important;
+  background-color: var(--bg-page) !important;
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
@@ -137,6 +137,43 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
+  background-color: #061325 !important;
+  color: #F8FAFC !important;
+}
+
+/* ==========================================================================
+   VIDEO GLOBAL DE FONDO & MOTOR CINEMÁTICO FIJO (STANDALONE CSS)
+   ========================================================================== */
+#global-video-bg {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  pointer-events: none !important;
+  background-color: #061325 !important;
+}
+
+#global-video-bg video,
+#hero-scroll-video {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+}
+
+.app-view {
+  position: relative !important;
+  z-index: 10 !important;
+  width: 100% !important;
 }
 
 :focus-visible {
@@ -147,11 +184,11 @@ body {
 /* UNIFIED TYPOGRAPHY (NO MEZCLA DE FUENTES) */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-main);
-  color: var(--navy-base);
+  color: #FFFFFF !important;
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  text-transform: none; /* NO MAYÚSCULAS SOSTENIDAS GIGANTES */
+  text-transform: none;
 }
 
 h1 { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 800; }
@@ -159,7 +196,7 @@ h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; }
 h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; }
 
 p {
-  color: #64748B;
+  color: #E2E8F0;
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.65;
