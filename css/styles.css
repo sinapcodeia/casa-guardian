@@ -267,7 +267,31 @@ a:hover {
   box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5) !important;
 }
 
-/* BUTTON SYSTEM — TRANSICIONES FLUIDAS, ELEGANTES & MICRO-INTERACCIONES */
+/* ==========================================================================
+   COMPARISON CARDS — FONDOS SÓLIDOS OPACOS (WCAG AA GARANTIZADO, SIN FILTRADO DE VIDEO)
+   ========================================================================== */
+.comparison-card-risk {
+  background: #1C0A0A !important;
+  border: 2px solid rgba(239, 68, 68, 0.55) !important;
+  color: #F1F5F9 !important;
+}
+
+.comparison-card-risk:hover {
+  border-color: rgba(239, 68, 68, 0.8) !important;
+  box-shadow: 0 0 30px rgba(239, 68, 68, 0.15) !important;
+}
+
+.comparison-card-guardian {
+  background: #061F14 !important;
+  border: 2px solid rgba(16, 185, 129, 0.55) !important;
+  color: #F1F5F9 !important;
+  box-shadow: 0 0 40px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(212,175,55,0.12) !important;
+}
+
+.comparison-card-guardian:hover {
+  border-color: rgba(16, 185, 129, 0.8) !important;
+  box-shadow: 0 0 50px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(212,175,55,0.15) !important;
+}
 
 .text-gradient {
   background: linear-gradient(135deg, #00B4D8 0%, #10B981 100%);
