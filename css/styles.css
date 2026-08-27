@@ -5,16 +5,16 @@
    ========================================================================== */
 
 :root {
-  /* PALETA DE LUJO EDITORIAL & CUSTODIA (NATIVE LUXURY DARK THEME) */
+  /* PALETA DE LUJO EDITORIAL & CUSTODIA */
   --color-marfil: #F3F0E8;
   --color-tinta: #11110F;
   --color-coral: #FF6E54;
   --color-oro: #D4AF37;
   
-  --navy-darker: #040D1A;
-  --navy-dark: #061325;
-  --navy-base: #091E36;
-  --navy-light: #0E2A4D;
+  --navy-darker: #0B0B09;
+  --navy-dark: #11110F;
+  --navy-base: #181815;
+  --navy-light: #242420;
 
   --gold-base: #D4AF37;
   --gold-light: #F3E5AB;
@@ -27,14 +27,14 @@
   --emerald-success: #10B981;
   --emerald-light: #34D399;
 
-  --bg-page: #061325;
-  --bg-surface: #091E36;
-  --bg-subtle: #0B2440;
-  --border-color: rgba(255, 255, 255, 0.12);
+  --bg-page: #F3F0E8;
+  --bg-surface: #FFFFFF;
+  --bg-subtle: #EBE7DE;
+  --border-color: rgba(17, 17, 15, 0.12);
 
   /* FUENTES EDITORIALES */
-  --font-main: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
-  --font-serif: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
+  --font-main: 'Instrument Sans', 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Cormorant Garamond', Georgia, serif;
   --font-mono: 'JetBrains Mono', monospace;
 
   --shadow-sm: 0 2px 8px rgba(17, 17, 15, 0.04);
@@ -53,50 +53,27 @@
   --transition-smooth: 400ms cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-*, *::before, *::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-img, video, svg {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
 /* ==========================================================================
-   RESGUARDOS ESTRUCTURALES DE LOGOTIPO & AVATARES (ZERO LAYOUT SHIFT / ZERO FOUC)
+   CONTENCIÓN ANTI-FLASH — Previene FOUC y desborde de imagen antes del CSS
+   NO altera el diseño visual — solo evita el parpadeo inicial
    ========================================================================== */
+
+/* Fondo oscuro inmediato para evitar flash blanco antes de que Tailwind cargue */
+html {
+  background-color: #08182B !important; /* fondo oscuro de respaldo = color real del diseño */
+}
+
+/* Logo: contenido máximo 48px en cualquier circunstancia */
 .brand-logo-icon,
-.brand-logo .brand-icon-box {
+.brand-logo img {
   width: 48px !important;
   height: 48px !important;
-  min-width: 48px !important;
-  min-height: 48px !important;
   max-width: 48px !important;
   max-height: 48px !important;
-  border-radius: 16px !important;
-  overflow: hidden !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: #08182B !important;
-  border: 1px solid rgba(212, 175, 55, 0.6) !important;
-  flex-shrink: 0 !important;
-}
-
-.brand-logo-icon img,
-.brand-logo img,
-.brand-icon-box img {
-  width: 44px !important;
-  height: 44px !important;
-  max-width: 44px !important;
-  max-height: 44px !important;
   object-fit: contain !important;
-  display: block !important;
 }
 
+/* Modalidades de logo en modales y admin */
 .modal-logo-box,
 .auth-modal-logo,
 .admin-logo-box {
@@ -111,24 +88,49 @@ img, video, svg {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  margin: 0 auto !important;
 }
 
 .modal-logo-box img,
 .auth-modal-logo img,
 .admin-logo-box img {
-  width: 48px !important;
-  height: 48px !important;
-  max-width: 48px !important;
-  max-height: 48px !important;
+  width: 44px !important;
+  height: 44px !important;
+  max-width: 44px !important;
+  max-height: 44px !important;
   object-fit: contain !important;
+}
+
+/* Video global de fondo: anclado a pantalla completa */
+#global-video-bg {
+  position: fixed !important;
+  top: 0 !important; left: 0 !important;
+  right: 0 !important; bottom: 0 !important;
+  width: 100vw !important;
+  height: 100vh !important;
+  z-index: 0 !important;
+  overflow: hidden !important;
+  background-color: #08182B !important;
+}
+
+#hero-scroll-video {
+  position: absolute !important;
+  top: 0 !important; left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 html {
   font-family: var(--font-main);
   font-size: 16px;
-  color: #F8FAFC !important;
-  background-color: var(--bg-page) !important;
+  color: #0F172A;
+  background-color: var(--bg-page);
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
 }
@@ -137,43 +139,6 @@ body {
   min-height: 100vh;
   line-height: 1.6;
   overflow-x: hidden;
-  background-color: #061325 !important;
-  color: #F8FAFC !important;
-}
-
-/* ==========================================================================
-   VIDEO GLOBAL DE FONDO & MOTOR CINEMÁTICO FIJO (STANDALONE CSS)
-   ========================================================================== */
-#global-video-bg {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  z-index: 0 !important;
-  overflow: hidden !important;
-  pointer-events: none !important;
-  background-color: #061325 !important;
-}
-
-#global-video-bg video,
-#hero-scroll-video {
-  position: absolute !important;
-  top: 0 !important;
-  left: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block !important;
-}
-
-.app-view {
-  position: relative !important;
-  z-index: 10 !important;
-  width: 100% !important;
 }
 
 :focus-visible {
@@ -184,11 +149,11 @@ body {
 /* UNIFIED TYPOGRAPHY (NO MEZCLA DE FUENTES) */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-main);
-  color: #FFFFFF !important;
+  color: var(--navy-base);
   font-weight: 800;
   line-height: 1.15;
   letter-spacing: -0.025em;
-  text-transform: none;
+  text-transform: none; /* NO MAYÚSCULAS SOSTENIDAS GIGANTES */
 }
 
 h1 { font-size: clamp(2.4rem, 4.5vw, 3.8rem); font-weight: 800; }
@@ -196,7 +161,7 @@ h2 { font-size: clamp(1.8rem, 3vw, 2.5rem); font-weight: 800; }
 h3 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 700; }
 
 p {
-  color: #E2E8F0;
+  color: #64748B;
   font-size: 1.05rem;
   font-weight: 400;
   line-height: 1.65;
@@ -212,87 +177,7 @@ a:hover {
   color: var(--cyan-base);
 }
 
-
-/* ==========================================================================
-   HERO CONTENT CARD — GLASSMORPHISM SÓLIDO WCAG AA (UI FIX)
-   ========================================================================== */
-.hero-content-card {
-  background: rgba(4, 13, 26, 0.72) !important;
-  backdrop-filter: blur(28px) saturate(140%) !important;
-  -webkit-backdrop-filter: blur(28px) saturate(140%) !important;
-  border: 1px solid rgba(212, 175, 55, 0.22) !important;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.04),
-    0 24px 64px rgba(0, 0, 0, 0.60),
-    inset 0 1px 0 rgba(255,255,255,0.08) !important;
-}
-
-/* HERO CTA — BOTÓN PRIMARIO ÚNICO DE MÁXIMA CONVERSIÓN */
-.hero-cta-primary {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 50%, #B45309 100%) !important;
-  color: #0A0A0A !important;
-  font-size: 1rem;
-  font-weight: 900;
-  letter-spacing: 0.01em;
-  border: none;
-  position: relative;
-  overflow: hidden;
-}
-
-.hero-cta-primary::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, rgba(255,255,255,0.22) 0%, transparent 60%);
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-.hero-cta-primary:hover {
-  background: linear-gradient(135deg, #FCD34D 0%, #F59E0B 50%, #D97706 100%) !important;
-  transform: scale(1.05) translateY(-2px);
-}
-
-/* NAVBAR CTA — ÚNICO CTA DE ALTA CONVERSIÓN EN BARRA */
-.nav-cta-primary {
-  background: linear-gradient(135deg, #D97706 0%, #B45309 100%) !important;
-  color: #FFFFFF !important;
-  border: 1px solid rgba(251, 191, 36, 0.4) !important;
-  box-shadow: 0 4px 14px rgba(217, 119, 6, 0.35) !important;
-  letter-spacing: 0.01em;
-}
-
-.nav-cta-primary:hover {
-  background: linear-gradient(135deg, #F59E0B 0%, #D97706 100%) !important;
-  box-shadow: 0 6px 20px rgba(217, 119, 6, 0.5) !important;
-}
-
-/* ==========================================================================
-   COMPARISON CARDS — FONDOS SÓLIDOS OPACOS (WCAG AA GARANTIZADO, SIN FILTRADO DE VIDEO)
-   ========================================================================== */
-.comparison-card-risk {
-  background: #1C0A0A !important;
-  border: 2px solid rgba(239, 68, 68, 0.55) !important;
-  color: #F1F5F9 !important;
-}
-
-.comparison-card-risk:hover {
-  border-color: rgba(239, 68, 68, 0.8) !important;
-  box-shadow: 0 0 30px rgba(239, 68, 68, 0.15) !important;
-}
-
-.comparison-card-guardian {
-  background: #061F14 !important;
-  border: 2px solid rgba(16, 185, 129, 0.55) !important;
-  color: #F1F5F9 !important;
-  box-shadow: 0 0 40px rgba(16, 185, 129, 0.1), inset 0 1px 0 rgba(212,175,55,0.12) !important;
-}
-
-.comparison-card-guardian:hover {
-  border-color: rgba(16, 185, 129, 0.8) !important;
-  box-shadow: 0 0 50px rgba(16, 185, 129, 0.2), inset 0 1px 0 rgba(212,175,55,0.15) !important;
-}
-
+/* EFECTO DE TEXTO DINÁMICO GRADIENTE */
 .text-gradient {
   background: linear-gradient(135deg, #00B4D8 0%, #10B981 100%);
   -webkit-background-clip: text;

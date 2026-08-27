@@ -44,12 +44,9 @@
       "alternateName": ["Casa Guardian Pasto", "Casa Guardian Property Care"],
       "legalName": "Casa Guardian PropTech SAS",
       "taxID": "901882145-8",
-      "image": [
-        "https://casa-guardian.vercel.app/img/hero-villa.jpg",
-        "https://casa-guardian.vercel.app/img/logo.jpg"
-      ],
+      "image": ["https://casa-guardian.vercel.app/img/hero-villa.jpg", "https://casa-guardian.vercel.app/img/logo.jpg"],
       "logo": "https://casa-guardian.vercel.app/img/favicon.jpg",
-      "description": "Custodia profesional de propiedades y vehículos en Pasto, Nariño y Colombia. Supervisión técnica, inspecciones periódicas y reportes certificados para propietarios ausentes en el exterior.",
+      "description": "Custodia profesional de propiedades y vehículos en Pasto, Nariño y Colombia. Supervisión técnica, inspecciones periódicas y reportes certificados para propietarios ausentes.",
       "url": "https://casa-guardian.vercel.app/",
       "telephone": "+573000000000",
       "email": "custodia@casaguardian.co",
@@ -64,61 +61,20 @@
         "postalCode": "520001",
         "addressCountry": "CO"
       },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": 1.2136,
-        "longitude": -77.2811
-      },
+      "geo": {"@type": "GeoCoordinates", "latitude": 1.2136, "longitude": -77.2811},
       "hasMap": "https://maps.google.com/?q=Pasto,Nariño,Colombia",
       "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "09:00",
-          "closes": "13:00"
-        }
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00"},
+        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"}
       ],
       "areaServed": [
         {"@type": "City", "name": "Pasto"},
         {"@type": "City", "name": "Ipiales"},
-        {"@type": "City", "name": "Chachagüí"},
-        {"@type": "City", "name": "Tangua"},
         {"@type": "AdministrativeArea", "name": "Nariño"},
         {"@type": "Country", "name": "Colombia"}
       ],
-      "serviceType": ["Custodia de propiedades", "Cuidado de casas", "Supervisión de vehículos", "Administración de inmuebles", "Home Watch"],
-      "aggregateRating": {
-        "@type": "AggregateRating",
-        "ratingValue": "4.9",
-        "bestRating": "5",
-        "worstRating": "1",
-        "reviewCount": "128"
-      },
-      "sameAs": [
-        "https://casa-guardian.vercel.app/"
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "Service",
-      "serviceType": "Custodia Integral de Propiedades y Vehículos",
-      "provider": {"@id": "https://casa-guardian.vercel.app/#organization"},
-      "areaServed": {"@type": "AdministrativeArea", "name": "Nariño, Colombia"},
-      "name": "Plan de Custodia Casa Guardian",
-      "description": "Inspecciones técnicas periódicas, ventilación certificada, control de humedad, supervisión de vehículos con arranque preventivo y reportes fotográficos con firma digital.",
-      "offers": {
-        "@type": "AggregateOffer",
-        "priceCurrency": "COP",
-        "lowPrice": "180000",
-        "highPrice": "890000",
-        "offerCount": "4"
-      }
+      "serviceType": ["Custodia de propiedades", "Cuidado de casas", "Supervisión de vehículos", "Home Watch"],
+      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "128"}
     },
     {
       "@context": "https://schema.org",
@@ -127,26 +83,17 @@
         {
           "@type": "Question",
           "name": "¿Qué incluye la custodia de propiedades en Pasto?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Incluye inspecciones técnicas periódicas, ventilación de espacios, control de humedad y fugas, supervisión de instalaciones eléctricas e hidráulicas, y entrega de reportes fotográficos certificados."
-          }
+          "acceptedAnswer": {"@type": "Answer", "text": "Inspecciones técnicas periódicas, ventilación de espacios, control de humedad, supervisión eléctrica e hidráulica y reportes fotográficos certificados SHA-256."}
         },
         {
           "@type": "Question",
           "name": "¿También cuidan vehículos mientras estoy en el exterior?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí. Realizamos arranques preventivos, revisión de batería, control de neumáticos y limpieza básica para que tu vehículo esté listo a tu regreso."
-          }
+          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Arranques preventivos, revisión de batería, control de neumáticos y limpieza básica para que tu vehículo esté listo a tu regreso."}
         },
         {
           "@type": "Question",
           "name": "¿Cuánto cuesta el servicio de custodia en Pasto?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Los planes de custodia comienzan desde $180.000 COP mensuales. El precio varía según el tipo de propiedad, la frecuencia de inspecciones y los servicios adicionales."
-          }
+          "acceptedAnswer": {"@type": "Answer", "text": "Los planes comienzan desde $180.000 COP mensuales según tipo de propiedad, frecuencia y servicios adicionales."}
         }
       ]
     },
@@ -162,15 +109,15 @@
   ]
   </script>
 
+  <!-- PRELOAD CRÍTICO — LCP optimizado -->
+  <link rel="preload" as="image" href="img/hero-villa.jpg" fetchpriority="high">
 
-  <!-- PRELOAD CRÍTICO — IMAGEN HERO WEBP (LCP OPTIMIZADO) -->
-  <link rel="preload" as="image" href="img/hero-villa.webp" type="image/webp" fetchpriority="high">
-
-  <!-- Google Fonts consolidadas: Plus Jakarta Sans + JetBrains Mono + Playfair Display -->
+  <!-- Google Fonts: Plus Jakarta Sans + JetBrains Mono + Playfair Display (serif rotador) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600;700&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,700;1,700;1,800&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@400,0&display=swap" rel="stylesheet" />
+
 
   <!-- Tailwind CSS & Sistema de Diseño Maestro -->
   <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
@@ -197,7 +144,7 @@
     }
   </script>
 </head>
-<body class="bg-[#061325] text-slate-100 font-sans antialiased selection:bg-amber-500 selection:text-slate-950">
+<body class="bg-slate-50 text-slate-900 font-sans antialiased selection:bg-sky-100 selection:text-sky-900">
 
   <!-- ==========================================================================
        HEADER CORPORATIVO DE CUSTODIA & SEGURIDAD INSTITUCIONAL
@@ -207,8 +154,8 @@
 
       <!-- IDENTIDAD CORPORATIVA CON ISOTIPO OFICIAL DESTACADO -->
       <a href="javascript:void(0)" onclick="window.scrollTo({top:0, behavior:'smooth'});" class="brand-logo flex items-center gap-3.5 group" aria-label="Casa Guardian Inicio">
-        <div class="brand-logo-icon h-12 w-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0 overflow-hidden" style="width:48px; height:48px; min-width:48px; min-height:48px; max-width:48px; max-height:48px;">
-          <img src="img/favicon.jpg" alt="Casa Guardian Isotipo" width="48" height="48" class="w-full h-full object-contain scale-110 group-hover:scale-125 transition-transform duration-300" style="width:48px; height:48px; max-width:48px; max-height:48px; object-fit:contain;">
+        <div class="h-12 w-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0 overflow-hidden">
+          <img src="img/favicon.jpg" alt="Casa Guardian Isotipo" width="44" height="44" class="w-full h-full object-contain scale-115 group-hover:scale-125 transition-transform duration-300" style="width:44px;height:44px;max-width:44px;max-height:44px;object-fit:contain;">
         </div>
         <div class="flex flex-col">
           <span class="text-white font-black tracking-tight text-lg leading-tight group-hover:text-amber-300 transition-colors">CASA GUARDIAN</span>
@@ -223,22 +170,18 @@
         <li><a href="#calculadora" class="nav-link" data-scroll="calculadora">Tarifas & Zonas</a></li>
       </ul>
 
-      <!-- ACCIONES NAVBAR: ÚNICO CTA PRINCIPAL (máxima conversión) -->
-      <div class="flex items-center gap-2 sm:gap-3">
-        <!-- Link discreto al portal (solo texto, sin peso visual competidor) -->
-        <button 
-          onclick="handlePortalClientClick()" 
-          class="hidden sm:inline-flex items-center gap-1.5 text-xs font-semibold text-slate-300 hover:text-amber-300 transition-colors px-2 py-1.5 rounded-lg hover:bg-white/5"
-          aria-label="Portal de Clientes">
-          <span class="material-symbols-outlined text-xs text-cyan-400">person</span>
-          Portal
+      <!-- ACCIONES: PORTAL CLIENTES Y ACTIVAR CUSTODIA (RESPONSIVE) -->
+      <div class="flex items-center gap-2 sm:gap-3.5">
+        <!-- ACCESO AL PORTAL PROPIETARIOS CON AUTENTICACIÓN SEGURA -->
+        <button onclick="handlePortalClientClick()" class="inline-flex items-center gap-1.5 text-xs font-bold text-slate-100 hover:text-white px-2.5 sm:px-3.5 py-2 sm:py-2.5 rounded-xl bg-slate-800/90 border border-slate-700 hover:border-cyan-400 transition-all shadow-sm cursor-pointer">
+          <span class="material-symbols-outlined text-sm text-cyan-400">enhanced_encryption</span>
+          <span class="hidden sm:inline">Portal Clientes</span>
+          <span class="inline sm:hidden">Portal</span>
         </button>
-        <!-- ÚNICO BOTÓN PRIMARIO DE ALTA CONVERSIÓN -->
-        <button 
-          class="nav-cta-primary btn text-xs sm:text-sm py-2 sm:py-2.5 px-4 sm:px-6 rounded-xl font-extrabold shadow-lg hover:scale-[1.04] transition-all shrink-0" 
-          onclick="openAuthModal('register')"
-          aria-label="Activar Plan de Custodia — Casa Guardian">
-          🛡️ <span class="hidden sm:inline">Activar</span> Custodia
+
+        <!-- CTA PRINCIPAL DE ACTIVACIÓN -->
+        <button class="btn bg-gradient-to-r from-amber-500 via-amber-600 to-amber-700 hover:from-amber-400 hover:to-amber-600 text-slate-950 text-xs py-2 sm:py-2.5 px-3 sm:px-4 rounded-xl font-extrabold shadow-lg shadow-amber-500/20 hover:scale-[1.02] transition-all shrink-0" onclick="openAuthModal('register')">
+          🛡️ <span class="hidden xs:inline">Activar</span> Custodia
         </button>
       </div>
 
@@ -257,161 +200,120 @@
         class="w-full h-full object-cover object-center" 
         playsinline 
         muted 
-        preload="metadata"
-        poster="img/hero-villa.webp"
+        preload="auto"
+        poster="img/hero-villa.jpg"
         aria-hidden="true"
       >
         <source src="media/casa.mp4" type="video/mp4">
         <source src="media/hero-architecture-loop.mp4" type="video/mp4">
       </video>
-      <!-- OVERLAY DENSO MULTICAPA — WCAG AA GARANTIZADO SOBRE VIDEO -->
-      <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
-        <!-- Capa base: oscurece el 75% del video para garantizar contraste de texto -->
-        <div class="absolute inset-0 bg-slate-950/75"></div>
-        <!-- Capa direccional: gradiente superior-inferior (navbar limpio, hero legible, secciones integradas) -->
-        <div class="absolute inset-0 bg-gradient-to-b from-slate-950/60 via-slate-950/30 to-slate-950/85"></div>
-        <!-- Capa lateral: viñeta lateral para profundidad cinematográfica -->
-        <div class="absolute inset-0 bg-gradient-to-r from-slate-950/40 via-transparent to-slate-950/40"></div>
-      </div>
+      <!-- CAPA DE PROFUNDIDAD CRISTALINA GLOBAL (PROTEGE EL TEXTO SIN CORTES NI SALTOS) -->
+      <div class="absolute inset-0 bg-slate-950/40 backdrop-brightness-95 pointer-events-none"></div>
     </div>
 
     <!-- TODO EL CONTENIDO DE LA WEB FLOTANDO SUAVEMENTE ENCIMA DEL VIDEO -->
     <div class="relative z-10 w-full">
 
-      <!-- HERO PRINCIPAL — TARJETA SÓLIDA GLASSMORPHISM + H1 OPTIMIZADO SEO LOCAL -->
-      <section class="min-h-[92vh] flex flex-col justify-center pt-28 pb-16 px-4 sm:px-10" id="guardian-hero-section">
-        <div class="max-w-4xl mx-auto w-full text-center flex flex-col items-center gap-6">
+      <!-- HERO FLOTANTE INICIAL (TEXTO ETÉREO VOLANDO DIRECTAMENTE SOBRE EL VIDEO) -->
+      <section class="min-h-[92vh] flex flex-col justify-center pt-28 pb-16 px-6 sm:px-10" id="guardian-hero-section">
+        <div class="max-w-5xl mx-auto w-full text-center flex flex-col items-center gap-6">
           
-          <!-- Badge de estado activo -->
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-amber-400/35 text-amber-300 text-xs font-bold tracking-widest uppercase shadow-lg">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold tracking-wide">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-            Custodia Activa · Pasto & Nariño
+            CUSTODIA DE PROPIEDADES · PASTO & NARIÑO
           </div>
 
-          <!-- TARJETA SÓLIDA GLASSMORPHISM — contraste WCAG AA garantizado sobre video -->
-          <div class="hero-content-card w-full max-w-3xl rounded-3xl px-6 sm:px-10 py-8 sm:py-10 text-center">
+          <!-- Titular Editorial Puro Volando Sobre el Video con Control Tipográfico Total -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] max-w-4xl mx-auto">
+            Tú viajas. Nosotros <span class="inline-block whitespace-nowrap">cuidamos tu <span id="dynamic-word" class="hero-dynamic-serif">Patrimonio</span>.</span>
+          </h1>
 
-            <!-- H1 ÚNICO — KEYWORD EXACTA SEO LOCAL: custodia + propiedades + vehículos + Pasto -->
-            <h1 class="text-4xl sm:text-5xl lg:text-[3.4rem] font-extrabold tracking-tight text-white leading-[1.08] mb-4">
-              Custodia técnica y supervisión profesional de tu
-              <span class="block text-amber-300 whitespace-nowrap">propiedad y vehículo en Pasto.</span>
-            </h1>
+          <p class="text-base sm:text-lg md:text-xl text-slate-100 font-normal leading-relaxed max-w-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
+            Supervisión técnica, ventilación periódica y protocolos de seguridad para propietarios ausentes. Tu casa en Pasto siempre resguardada.
+          </p>
 
-            <!-- SUBTÍTULO: USPs diferenciadores con SHA-256, telemetría y SLA claro -->
-            <p class="text-base sm:text-lg text-slate-200 font-normal leading-relaxed max-w-xl mx-auto mb-8">
-              Protegemos tu patrimonio mientras estás ausente con inspecciones certificadas <strong class="text-amber-300 font-bold">SHA-256</strong>, telemetría y respuesta en menos de <strong class="text-emerald-400 font-bold">45 minutos</strong>.
-            </p>
+          <div class="flex flex-wrap items-center justify-center gap-4 mt-4">
+            <button onclick="openAuthModal('register')" class="btn bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black px-8 py-4 rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-sm flex items-center gap-2" aria-label="Activar Plan de Custodia">
+              <span class="material-symbols-outlined text-base font-bold">shield</span>
+              <span>Activar Plan de Custodia</span>
+            </button>
+            <button onclick="scrollToSection('pilares')" class="btn bg-slate-950/60 hover:bg-slate-900/80 text-slate-100 hover:text-white border border-white/30 hover:border-amber-400/50 backdrop-blur-md font-bold px-8 py-4 rounded-full transition-all text-sm flex items-center gap-2" aria-label="Ver Servicios y Tarifas">
+              <span class="material-symbols-outlined text-base">explore</span>
+              <span>Ver Servicios & Tarifas</span>
+            </button>
+          </div>
 
-            <!-- CTA: 1 PRIMARIO + 1 SECUNDARIO (regla CRO) -->
-            <div class="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
-              <!-- PRIMARIO → Calculadora interactiva -->
-              <button 
-                onclick="scrollToSection('calculadora')" 
-                class="hero-cta-primary inline-flex items-center justify-center gap-2.5 w-full sm:w-auto px-9 py-4 rounded-full font-black text-slate-950 text-base shadow-[0_12px_36px_rgba(212,175,55,0.45)] hover:scale-105 hover:shadow-[0_16px_48px_rgba(212,175,55,0.6)] transition-all duration-300"
-                aria-label="Cotizar mi Plan de Custodia — Casa Guardian Pasto">
-                <span class="material-symbols-outlined text-lg font-bold">calculate</span>
-                Cotizar mi Plan
-              </button>
-              <!-- SECUNDARIO → Protocolo de 45 puntos -->
-              <button 
-                onclick="scrollToSection('pilares')" 
-                class="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-7 py-4 rounded-full text-sm font-bold text-white border border-white/25 hover:border-amber-400/60 bg-slate-950/40 hover:bg-slate-900/60 backdrop-blur-md transition-all duration-300"
-                aria-label="Conocer protocolos y servicios de custodia">
-                <span class="material-symbols-outlined text-base">shield_check</span>
-                Conocer Protocolos
-              </button>
-            </div>
-
-            <!-- Trust signals -->
-            <div class="flex flex-wrap items-center justify-center gap-x-5 gap-y-2 mt-7 text-xs font-semibold text-slate-300">
-              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold text-sm">✓</span> Llaves Cifradas SHA-256</span>
-              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold text-sm">✓</span> Reportes Fotográficos Certificados</span>
-              <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold text-sm">✓</span> Respuesta &lt; 45 min</span>
-            </div>
+          <div class="flex items-center justify-center gap-8 mt-6 text-xs font-semibold text-slate-200 drop-shadow-[0_2px_8px_rgba(0,0,0,0.9)]">
+            <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Llaves Cifradas</span>
+            <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Hash SHA-256</span>
+            <span class="flex items-center gap-1.5"><span class="text-emerald-400 font-bold">✓</span> Respuesta &lt; 45 min</span>
           </div>
 
         </div>
       </section>
 
-
-
-      <!-- SECCIÓN COMPARATIVA — H2 SEMÁNTICO + TARJETAS SÓLIDAS CONTRASTANTES -->
+      <!-- SECCIÓN LA DIFERENCIA FLOTANTE EN CRISTAL MINIMALISTA -->
       <section class="section max-w-6xl mx-auto px-6" id="diferencia">
         <div class="section-header text-center">
           <span class="section-tag">Tranquilidad Certificada</span>
-          <h2 class="section-title">Comparativa: Custodia Tradicional vs Casa Guardian</h2>
-          <p class="section-subtitle">Tu mayor patrimonio merece protocolos profesionales, no improvisaciones.</p>
+          <h2 class="section-title">La diferencia entre angustia y paz mental</h2>
+          <p class="section-subtitle">Tu mayor patrimonio en manos profesionales con protocolos de seguridad.</p>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8">
-
-          <!-- TARJETA RIESGO — Fondo sólido oscuro, borde rojo definido -->
-          <div class="comparison-card-risk p-8 sm:p-10 rounded-3xl shadow-2xl">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <!-- Columna 1: Tradicional -->
+          <div class="p-8 sm:p-10 rounded-3xl bg-red-950/30 backdrop-blur-xl border border-red-500/20 text-white shadow-2xl">
             <div class="flex items-center gap-2 text-red-400 font-bold text-xs uppercase tracking-widest mb-3">
               <span class="material-symbols-outlined text-sm">cancel</span> Opción Tradicional (Riesgo)
             </div>
-            <h3 class="text-2xl font-bold text-red-200 mb-5">Dejar llaves a un conocido</h3>
+            <h3 class="text-2xl font-bold text-white mb-4">Dejar llaves a un conocido</h3>
             <ul class="space-y-3.5 text-slate-300 text-sm">
               <li class="flex items-start gap-2.5">
-                <span class="text-red-400 font-bold text-base mt-px">✕</span>
+                <span class="text-red-400 font-bold">✕</span>
                 <span>Sin revisión técnica periódica de humedad o agua.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-red-400 font-bold text-base mt-px">✕</span>
+                <span class="text-red-400 font-bold">✕</span>
                 <span>Fugas silenciosas detectadas demasiado tarde.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-red-400 font-bold text-base mt-px">✕</span>
+                <span class="text-red-400 font-bold">✕</span>
                 <span>Vehículo parado con batería descargada.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-red-400 font-bold text-base mt-px">✕</span>
+                <span class="text-red-400 font-bold">✕</span>
                 <span>Sin reportes fotográficos ni respaldo formal.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-red-400 font-bold text-base mt-px">✕</span>
-                <span>Responsabilidad difusa ante daños o pérdidas.</span>
               </li>
             </ul>
           </div>
 
-          <!-- TARJETA GUARDIAN — Fondo sólido verde oscuro, borde esmeralda/dorado (recomendado) -->
-          <div class="comparison-card-guardian p-8 sm:p-10 rounded-3xl shadow-2xl relative overflow-hidden">
-            <!-- Badge "Recomendado" -->
-            <div class="absolute top-5 right-5 px-3 py-1 bg-emerald-500 text-white text-[10px] font-black rounded-full uppercase tracking-widest shadow">Recomendado</div>
-            <div class="flex items-center gap-2 text-emerald-400 font-bold text-xs uppercase tracking-widest mb-3">
+          <!-- Columna 2: Guardian -->
+          <div class="p-8 sm:p-10 rounded-3xl bg-black/60 backdrop-blur-xl border border-amber-400/30 text-white shadow-2xl">
+            <div class="flex items-center gap-2 text-amber-300 font-bold text-xs uppercase tracking-widest mb-3">
               <span class="material-symbols-outlined text-sm">verified</span> Sistema Casa Guardian
             </div>
-            <h3 class="text-2xl font-bold text-white mb-5">Custodia Profesional Certificada</h3>
+            <h3 class="text-2xl font-bold text-white mb-4">Custodia Profesional Certificada</h3>
             <ul class="space-y-3.5 text-slate-200 text-sm">
               <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base mt-px">✓</span>
-                <span>Checklist técnico de <strong class="text-white">45 puntos</strong> por visita certificada.</span>
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Checklist técnico de 45 puntos por visita.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base mt-px">✓</span>
+                <span class="text-emerald-400 font-bold">✓</span>
                 <span>Detección oportuna y reparaciones aprobadas en 1 clic.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base mt-px">✓</span>
+                <span class="text-emerald-400 font-bold">✓</span>
                 <span>Encendido periódico de vehículos y cuidado de jardines.</span>
               </li>
               <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base mt-px">✓</span>
-                <span>Reporte fotográfico HD con sello <strong class="text-amber-300">SHA-256</strong> inmutable.</span>
-              </li>
-              <li class="flex items-start gap-2.5">
-                <span class="text-emerald-400 font-bold text-base mt-px">✓</span>
-                <span>Respuesta ante emergencias en <strong class="text-white">&lt; 45 minutos</strong>.</span>
+                <span class="text-emerald-400 font-bold">✓</span>
+                <span>Reporte fotográfico HD certificado con Hash SHA-256.</span>
               </li>
             </ul>
-            <button onclick="scrollToSection('calculadora')" class="mt-7 w-full py-3 rounded-2xl bg-emerald-500 hover:bg-emerald-400 text-white font-extrabold text-sm tracking-wide transition-all shadow-lg hover:shadow-emerald-500/40">
-              Cotizar mi Plan →
-            </button>
           </div>
         </div>
       </section>
-
 
     <!-- 4 PILARES CON PRESENTACIÓN LIMPIA -->
     <!-- SERVICIOS INTEGRALES — ARQUITECTURA BENTO GRID (ESTILO PINTEREST BENCHMARK PRO) -->
@@ -844,7 +746,7 @@
               <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold rounded-full border border-emerald-500/40" id="dash-prop-status">ESTADO: PROTEGIDO & SIN NOVEDAD</span>
               <span class="text-xs text-slate-400 font-mono" id="dash-prop-id">ID: CG-7749-PAS</span>
             </div>
-            <h2 class="text-2xl md:text-3xl font-extrabold text-white" id="dash-prop-name">Villa Serena — Casa Pasto</h2>
+            <h1 class="text-2xl md:text-3xl font-extrabold text-white" id="dash-prop-name">Villa Serena — Casa Pasto</h1>
             <p class="text-xs text-slate-400 mt-1" id="dash-prop-address">Conjunto Residencial Morasurco, Pasto, Nariño</p>
           </div>
 
@@ -1066,16 +968,13 @@
     <div class="max-w-7xl mx-auto px-6 py-24">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="badge badge-cyan mb-3">IA DE INSPECCIÓN AUTÓNOMA</span>
-        <h2 class="text-3xl font-extrabold text-white">AI Property Guardian & Certificación Legal</h2>
+        <h1 class="text-3xl font-extrabold text-slate-900">AI Property Guardian & Certificación Legal</h1>
       </div>
 
       <div class="grid md:grid-cols-12 gap-8 items-start">
         <div class="md:col-span-7 bg-slate-900 rounded-3xl p-6 text-white border border-slate-800 shadow-2xl">
           <div class="ai-scanner-container relative rounded-2xl overflow-hidden mb-6 h-80">
-            <picture>
-              <source srcset="img/hero-villa.webp" type="image/webp">
-              <img class="w-full h-full object-cover" alt="Inspección Fotográfica con IA en propiedad de Pasto" src="img/hero-villa.jpg" width="1000" height="600" loading="lazy" decoding="async" />
-            </picture>
+            <img class="w-full h-full object-cover" alt="Inspección Fotográfica con IA" src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1000&q=80" />
             <div class="ai-laser-line"></div>
           </div>
         </div>
@@ -1093,8 +992,8 @@
       <!-- PANTALLA DE LOGIN ADMIN (SI NO ESTÁ AUTENTICADO) -->
       <div id="admin-login-screen" class="max-w-md mx-auto my-12 p-8 bg-[#091E36] rounded-3xl border border-amber-400/30 shadow-2xl">
         <div class="text-center mb-6">
-          <div class="admin-logo-box w-16 h-16 mx-auto rounded-2xl bg-slate-900 border border-amber-400/50 flex items-center justify-center p-1 mb-3 shadow-[0_0_20px_rgba(212,175,55,0.2)]" style="width:56px; height:56px; min-width:56px; min-height:56px; max-width:56px; max-height:56px;">
-            <img src="img/favicon.jpg" alt="Casa Guardian" width="48" height="48" class="w-full h-full object-contain rounded-xl" style="width:48px; height:48px; max-width:48px; max-height:48px; object-fit:contain;">
+          <div class="w-16 h-16 mx-auto rounded-2xl bg-slate-900 border border-amber-400/50 flex items-center justify-center p-1 mb-3 shadow-[0_0_20px_rgba(212,175,55,0.2)]">
+            <img src="img/favicon.jpg" alt="Casa Guardian" class="w-full h-full object-contain rounded-xl">
           </div>
           <h2 class="text-2xl font-extrabold text-white">Centro de Mando</h2>
           <p class="text-xs text-slate-400 mt-1">Acceso Exclusivo de Dirección & Operaciones</p>
@@ -1132,7 +1031,7 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h2 class="text-xl font-extrabold text-white">Antonio Burgos</h2>
+                <h1 class="text-xl font-extrabold text-white">Antonio Burgos</h1>
                 <span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold rounded-full border border-amber-500/40">DIRECTOR GENERAL</span>
               </div>
               <p class="text-xs text-slate-400">antonio_rburgos@msn.com · Sede Central Pasto, Nariño</p>
@@ -1302,8 +1201,8 @@
       <button class="modal-close text-slate-400 hover:text-white" onclick="closeAuthModal()">&times;</button>
       
       <div class="flex items-center gap-3.5 mb-6 pb-4 border-b border-slate-800">
-        <div class="auth-modal-logo w-12 h-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0 overflow-hidden" style="width:48px; height:48px; min-width:48px; min-height:48px; max-width:48px; max-height:48px;">
-          <img src="img/favicon.jpg" alt="Casa Guardian" width="44" height="44" class="w-full h-full object-contain scale-110" style="width:44px; height:44px; max-width:44px; max-height:44px; object-fit:contain;">
+        <div class="w-12 h-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-[0_0_20px_rgba(212,175,55,0.35)] shrink-0 overflow-hidden">
+          <img src="img/favicon.jpg" alt="Casa Guardian" class="w-full h-full object-contain scale-115">
         </div>
         <div>
           <h2 class="text-lg font-black text-white tracking-tight">CASA GUARDIAN</h2>
@@ -1423,8 +1322,8 @@
       <button class="modal-close" onclick="closePrivacyModal()" aria-label="Cerrar">&times;</button>
       
       <div class="flex items-center gap-3 border-b border-slate-800 pb-4 mb-6">
-        <div class="modal-logo-box w-12 h-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-lg shrink-0" style="width:48px; height:48px; min-width:48px; min-height:48px; max-width:48px; max-height:48px;">
-          <img src="img/favicon.jpg" alt="Casa Guardian" width="44" height="44" class="w-full h-full object-contain scale-110" style="width:44px; height:44px; max-width:44px; max-height:44px; object-fit:contain;">
+        <div class="w-12 h-12 rounded-2xl bg-[#08182B] border border-amber-400/60 flex items-center justify-center p-0.5 shadow-lg shrink-0">
+          <img src="img/favicon.jpg" alt="Casa Guardian" class="w-full h-full object-contain scale-115">
         </div>
         <div>
           <h2 id="privacy-modal-title" class="text-base sm:text-lg font-extrabold text-white">Política de Tratamiento de Datos & Custodia Notarial</h2>
@@ -1588,10 +1487,7 @@
        ========================================================================== -->
   <div class="concierge-trigger" onclick="toggleConciergeDrawer()" aria-label="Hablar con Asesora de Custodia 24/7">
     <div class="concierge-avatar-pulse">
-      <picture>
-        <source srcset="img/concierge-woman.webp" type="image/webp">
-        <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover rounded-full" width="400" height="400" loading="lazy" decoding="async">
-      </picture>
+      <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover rounded-full">
     </div>
     <div class="flex flex-col text-left">
       <span class="text-xs font-extrabold text-white leading-tight">Asesora Virtual</span>
@@ -1607,10 +1503,7 @@
     <div class="concierge-header">
       <div class="flex items-center gap-3">
         <div class="w-10 h-10 rounded-full border-2 border-amber-400 overflow-hidden shadow-md shrink-0">
-          <picture>
-            <source srcset="img/concierge-woman.webp" type="image/webp">
-            <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover" width="400" height="400" loading="lazy" decoding="async">
-          </picture>
+          <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover">
         </div>
         <div>
           <h4 class="text-sm font-extrabold text-white">Sofía · Custodia Casa Guardian</h4>
