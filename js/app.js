@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initCurrencySelector();
   initScrollReveal();
   initHeroVideoScrollScrubbing();
+  initScrollAwareConcierge();
 });
 
 /* --------------------------------------------------------------------------
@@ -709,6 +710,32 @@ window.conciergeSelectOption = function(option) {
     window.open(`https://wa.me/573000000000?text=${message}`, '_blank');
   }
 };
+
+/**
+ * 10. DETECCIÓN INTELIGENTE DE SCROLL PARA EL BOT / ASESORA
+ * - Mientras el usuario se desplaza, la asesora se repliega/oculta sutilmente
+ * - Al detenerse el scroll, emerge suavemente flotando en la esquina inferior derecha
+ */
+function initScrollAwareConcierge() {
+  const trigger = document.querySelector('.concierge-trigger');
+  if (!trigger) return;
+
+  let scrollTimeout = null;
+
+  window.addEventListener('scroll', () => {
+    // Al desplazarse, ocultar sutilmente
+    trigger.classList.add('is-scrolling');
+
+    if (scrollTimeout) {
+      clearTimeout(scrollTimeout);
+    }
+
+    // Al detener el scroll, reaparecer con elegancia (debounce de 380ms)
+    scrollTimeout = setTimeout(() => {
+      trigger.classList.remove('is-scrolling');
+    }, 380);
+  }, { passive: true });
+}
 
 /* --------------------------------------------------------------------------
    8. MOTOR DE VIDEO SCROLL ULTRA-SUAVE (CINEMATIC LERP & HARDWARE ACCELERATION)

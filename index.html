@@ -1437,34 +1437,34 @@
   </div>
 
   <!-- ==========================================================================
-       CONCIERGE VIRTUAL 24/7 — ASISTENTE INTELIGENTE DE CUSTODIA (CUSTODIA BOT)
+       CONCIERGE VIRTUAL 24/7 — ASISTENTE INTELIGENTE DE CUSTODIA (ASESORA EN VIVO)
        ========================================================================== -->
-  <div class="concierge-trigger" onclick="toggleConciergeDrawer()" aria-label="Abrir Custodia Bot 24/7">
+  <div class="concierge-trigger" onclick="toggleConciergeDrawer()" aria-label="Hablar con Asesora de Custodia 24/7">
     <div class="concierge-avatar-pulse">
-      <span class="material-symbols-outlined text-lg">smart_toy</span>
+      <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover rounded-full">
     </div>
     <div class="flex flex-col text-left">
-      <span class="text-xs font-extrabold text-white leading-tight">Custodia Bot</span>
+      <span class="text-xs font-extrabold text-white leading-tight">Asesora Virtual</span>
       <span class="text-[10px] text-emerald-400 font-bold flex items-center gap-1">
         <span class="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
-        Asistente 24/7
+        En Línea 24/7
       </span>
     </div>
   </div>
 
   <!-- DRAWER INTERACTIVO DEL CONCIERGE -->
-  <div id="concierge-drawer" class="concierge-drawer">
+  <div id="concierge-drawer" class="concierge-drawer" role="dialog" aria-modal="true" aria-label="Asistente de Custodia">
     <div class="concierge-header">
       <div class="flex items-center gap-3">
-        <div class="w-9 h-9 rounded-full bg-gradient-to-tr from-amber-400 to-cyan-400 flex items-center justify-center text-slate-900 font-extrabold text-xs">
-          CG
+        <div class="w-10 h-10 rounded-full border-2 border-amber-400 overflow-hidden shadow-md shrink-0">
+          <img src="img/concierge-woman.jpg" alt="Asesora de Custodia" class="w-full h-full object-cover">
         </div>
         <div>
-          <h4 class="text-sm font-extrabold text-white">Concierge Casa Guardian</h4>
-          <p class="text-[11px] text-slate-300">Asistente de Custodia & Emergencias</p>
+          <h4 class="text-sm font-extrabold text-white">Sofía · Custodia Casa Guardian</h4>
+          <p class="text-[11px] text-slate-300">Asesora Especialista & Emergencias</p>
         </div>
       </div>
-      <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="toggleConciergeDrawer()">&times;</button>
+      <button class="text-slate-400 hover:text-white text-lg font-bold" onclick="toggleConciergeDrawer()" aria-label="Cerrar">&times;</button>
     </div>
 
     <div class="p-5 flex flex-col gap-4 text-xs">

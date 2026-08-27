@@ -1020,40 +1020,57 @@ input::placeholder, textarea::placeholder {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  background: linear-gradient(135deg, #091E36 0%, #061325 100%);
-  border: 1px solid rgba(212, 175, 55, 0.4);
-  padding: 0.65rem 1.15rem 0.65rem 0.75rem;
+  background: linear-gradient(135deg, rgba(9, 30, 54, 0.95) 0%, rgba(6, 19, 37, 0.98) 100%);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid rgba(212, 175, 55, 0.5);
+  padding: 0.5rem 1.15rem 0.5rem 0.65rem;
   border-radius: var(--radius-full);
-  box-shadow: 0 12px 30px rgba(6, 19, 37, 0.4);
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.6), 0 0 15px rgba(212, 175, 55, 0.2);
   cursor: pointer;
-  transition: all var(--transition-smooth);
+  transition: opacity 0.45s cubic-bezier(0.16, 1, 0.3, 1), transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.45s;
+  opacity: 1;
+  transform: translateY(0) scale(1);
+  visibility: visible;
+}
+
+.concierge-trigger.is-scrolling {
+  opacity: 0 !important;
+  transform: translateY(25px) scale(0.88) !important;
+  pointer-events: none !important;
+  visibility: hidden;
 }
 
 .concierge-trigger:hover {
-  transform: translateY(-3px) scale(1.02);
+  transform: translateY(-3px) scale(1.03);
   border-color: var(--gold-base);
-  box-shadow: 0 16px 36px rgba(212, 175, 55, 0.25);
+  box-shadow: 0 16px 40px rgba(212, 175, 55, 0.35);
 }
 
 .concierge-avatar-pulse {
   position: relative;
-  width: 40px;
-  height: 40px;
+  width: 42px;
+  height: 42px;
   border-radius: 50%;
-  background: linear-gradient(135deg, #D4AF37 0%, #00B4D8 100%);
+  overflow: hidden;
+  border: 2px solid #D4AF37;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: #FFFFFF;
+  background: #08182B;
+  flex-shrink: 0;
 }
 
 .concierge-avatar-pulse::after {
   content: '';
   position: absolute;
-  inset: -3px;
+  bottom: 1px;
+  right: 1px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
-  border: 2px solid var(--emerald-success);
-  animation: pulse-glow 2s infinite;
+  background: #10B981;
+  border: 2px solid #08182B;
+  box-shadow: 0 0 8px #10B981;
 }
 
 .concierge-drawer {
