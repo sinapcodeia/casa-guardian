@@ -33,80 +33,92 @@
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
 
-  <!-- ESQUEMAS ESTRUCTURADOS JSON-LD — SEO LOCAL PASTO / NARIÑO / COLOMBIA -->
+  <!-- ESQUEMAS ESTRUCTURADOS JSON-LD — GEO & SEO LOCAL MULTIENTIDAD (@graph) -->
   <script type="application/ld+json">
-  [
-    {
-      "@context": "https://schema.org",
-      "@type": ["LocalBusiness", "RealEstateAgent", "HomeAndConstructionBusiness"],
-      "@id": "https://casa-guardian.vercel.app/#organization",
-      "name": "Casa Guardian — Custodia de Propiedades y Vehículos",
-      "alternateName": ["Casa Guardian Pasto", "Casa Guardian Property Care"],
-      "legalName": "Casa Guardian PropTech SAS",
-      "taxID": "901882145-8",
-      "image": ["https://casa-guardian.vercel.app/img/hero-villa.jpg", "https://casa-guardian.vercel.app/img/logo.jpg"],
-      "logo": "https://casa-guardian.vercel.app/img/favicon.jpg",
-      "description": "Custodia profesional de propiedades y vehículos en Pasto, Nariño y Colombia. Supervisión técnica, inspecciones periódicas y reportes certificados para propietarios ausentes.",
-      "url": "https://casa-guardian.vercel.app/",
-      "telephone": "+573000000000",
-      "email": "custodia@casaguardian.co",
-      "priceRange": "$$",
-      "currenciesAccepted": "COP",
-      "paymentAccepted": "Transferencia bancaria, PSE, Nequi, Daviplata",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Pasto",
-        "addressLocality": "Pasto",
-        "addressRegion": "Nariño",
-        "postalCode": "520001",
-        "addressCountry": "CO"
-      },
-      "geo": {"@type": "GeoCoordinates", "latitude": 1.2136, "longitude": -77.2811},
-      "hasMap": "https://maps.google.com/?q=Pasto,Nariño,Colombia",
-      "openingHoursSpecification": [
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"], "opens": "08:00", "closes": "18:00"},
-        {"@type": "OpeningHoursSpecification", "dayOfWeek": "Saturday", "opens": "09:00", "closes": "13:00"}
-      ],
-      "areaServed": [
-        {"@type": "City", "name": "Pasto"},
-        {"@type": "City", "name": "Ipiales"},
-        {"@type": "AdministrativeArea", "name": "Nariño"},
-        {"@type": "Country", "name": "Colombia"}
-      ],
-      "serviceType": ["Custodia de propiedades", "Cuidado de casas", "Supervisión de vehículos", "Home Watch"],
-      "aggregateRating": {"@type": "AggregateRating", "ratingValue": "4.9", "bestRating": "5", "reviewCount": "128"}
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Qué incluye la custodia de propiedades en Pasto?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Inspecciones técnicas periódicas, ventilación de espacios, control de humedad, supervisión eléctrica e hidráulica y reportes fotográficos certificados SHA-256."}
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "HomeAndConstructionBusiness",
+        "@id": "https://casa-guardian.vercel.app/#business",
+        "name": "Casa Guardian",
+        "alternateName": "Casa Guardian Pasto",
+        "description": "Servicio profesional de custodia técnica, inspección y mantenimiento preventivo de residencias y vehículos para propietarios ausentes.",
+        "url": "https://casa-guardian.vercel.app/",
+        "telephone": "+573000000000",
+        "email": "custodia@casaguardian.co",
+        "priceRange": "$$",
+        "image": "https://casa-guardian.vercel.app/img/hero-villa.jpg",
+        "logo": "https://casa-guardian.vercel.app/img/favicon.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "streetAddress": "Pasto",
+          "addressLocality": "Pasto",
+          "addressRegion": "Nariño",
+          "postalCode": "520001",
+          "addressCountry": "CO"
         },
-        {
-          "@type": "Question",
-          "name": "¿También cuidan vehículos mientras estoy en el exterior?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Sí. Arranques preventivos, revisión de batería, control de neumáticos y limpieza básica para que tu vehículo esté listo a tu regreso."}
+        "geo": {
+          "@type": "GeoCoordinates",
+          "latitude": 1.2136,
+          "longitude": -77.2811
         },
-        {
-          "@type": "Question",
-          "name": "¿Cuánto cuesta el servicio de custodia en Pasto?",
-          "acceptedAnswer": {"@type": "Answer", "text": "Los planes comienzan desde $180.000 COP mensuales según tipo de propiedad, frecuencia y servicios adicionales."}
+        "areaServed": ["Pasto", "Chachagüí", "La Cocha", "Catambuco", "Tangua", "Ipiales", "Nariño", "Colombia"],
+        "aggregateRating": {
+          "@type": "AggregateRating",
+          "ratingValue": "4.9",
+          "bestRating": "5",
+          "reviewCount": "128"
         }
-      ]
-    },
-    {
-      "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://casa-guardian.vercel.app/"},
-        {"@type": "ListItem", "position": 2, "name": "Servicios de Custodia", "item": "https://casa-guardian.vercel.app/#pilares"},
-        {"@type": "ListItem", "position": 3, "name": "Tarifas & Zonas", "item": "https://casa-guardian.vercel.app/#calculadora"}
-      ]
-    }
-  ]
+      },
+      {
+        "@type": "Service",
+        "@id": "https://casa-guardian.vercel.app/#service",
+        "name": "Custodia Técnica y Supervisión de Propiedades",
+        "provider": {"@id": "https://casa-guardian.vercel.app/#business"},
+        "description": "Inspecciones de 45 puntos, telemetría y reportes con hash SHA-256 para propietarios ausentes.",
+        "areaServed": ["Pasto", "Chachagüí", "La Cocha", "Catambuco", "Nariño"]
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://casa-guardian.vercel.app/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "¿Cómo funciona la custodia de llaves de Casa Guardian?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Las llaves se resguardan bajo cajas de seguridad cifradas con precinto inviolable. Cada ingreso se registra mediante acta digital y reporte fotográfico inmutable firmado con algoritmo SHA-256 bajo la Ley 527 de 1999."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Qué incluye la inspección y supervisión técnica en Pasto y Nariño?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Incluye revisión hidráulica contra fugas, control de humedad relativa, ventilación cruzada, chequeo de sistemas eléctricos, arranque preventivo de vehículos y emisión de informe fotográfico certificado en tiempo real."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "¿Cuál es el tiempo de respuesta ante emergencias?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Nuestro equipo técnico y de custodia garantiza un tiempo de reacción y presencia física en el inmueble menor a 45 minutos en el perímetro urbano de Pasto y zonas metropolitanas autorizadas."
+            }
+          }
+        ]
+      },
+      {
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+          {"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://casa-guardian.vercel.app/"},
+          {"@type": "ListItem", "position": 2, "name": "Servicios & Protocolo 45 Puntos", "item": "https://casa-guardian.vercel.app/#pilares"},
+          {"@type": "ListItem", "position": 3, "name": "Calculadora de Tarifas", "item": "https://casa-guardian.vercel.app/#calculadora"}
+        ]
+      }
+    ]
+  }
   </script>
 
   <!-- PRELOAD CRÍTICO — LCP optimizado -->
@@ -214,32 +226,34 @@
     <!-- TODO EL CONTENIDO DE LA WEB FLOTANDO SUAVEMENTE ENCIMA DEL VIDEO -->
     <div class="relative z-10 w-full">
 
-      <!-- HERO FLOTANTE INICIAL (TEXTO ETÉREO VOLANDO DIRECTAMENTE SOBRE EL VIDEO) -->
-      <section class="min-h-[92vh] flex flex-col justify-center pt-28 pb-16 px-6 sm:px-10" id="guardian-hero-section">
-        <div class="max-w-5xl mx-auto w-full text-center flex flex-col items-center gap-6">
+      <!-- HERO FLOTANTE INICIAL (TEXTO ETÉREO PROTEGIDO CON SCRIM GRADIENT WCAG 2.2 AA) -->
+      <section class="hero-container min-h-[92vh] flex flex-col justify-center pt-28 pb-16 px-6 sm:px-10" id="guardian-hero-section">
+        <div class="hero-backdrop"></div>
+        <div class="hero-content max-w-5xl mx-auto w-full text-center flex flex-col items-center gap-6">
           
-          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/40 backdrop-blur-md border border-white/20 text-amber-300 text-xs font-bold tracking-wide">
+          <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-black/50 backdrop-blur-md border border-amber-400/40 text-amber-300 text-xs font-bold tracking-wide shadow-lg">
             <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
             CUSTODIA DE PROPIEDADES · PASTO & NARIÑO
           </div>
 
-          <!-- Titular Editorial Puro Volando Sobre el Video con Control Tipográfico Total -->
-          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.85)] max-w-4xl mx-auto">
-            Tú viajas. Nosotros <span class="inline-block whitespace-nowrap">cuidamos tu <span id="dynamic-word" class="hero-dynamic-serif">Patrimonio</span>.</span>
+          <!-- Titular Semántico Único (GEO / SEO) con Control Tipográfico y text-wrap balance -->
+          <h1 class="text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight text-white leading-tight drop-shadow-[0_4px_24px_rgba(0,0,0,0.95)] max-w-4xl mx-auto">
+            Custodia Técnica y Supervisión de Propiedades en <span class="inline-block whitespace-nowrap">Pasto y <span id="dynamic-word" class="hero-dynamic-serif">Nariño</span>.</span>
           </h1>
 
-          <p class="text-base sm:text-lg md:text-xl text-slate-100 font-normal leading-relaxed max-w-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.85)]">
-            Supervisión técnica, ventilación periódica y protocolos de seguridad para propietarios ausentes. Tu casa en Pasto siempre resguardada.
+          <p class="text-base sm:text-lg md:text-xl text-slate-100 font-normal leading-relaxed max-w-2xl drop-shadow-[0_2px_12px_rgba(0,0,0,0.9)]">
+            Protegemos tu patrimonio mientras estás ausente con inspecciones certificadas SHA-256, telemetría y respuesta en menos de 45 minutos.
           </p>
 
+          <!-- Jerarquía CRO (Fitts' Law): 1 Primario Destacado + 1 Secundario Ghost -->
           <div class="flex flex-wrap items-center justify-center gap-4 mt-4">
-            <button onclick="openAuthModal('register')" class="btn bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black px-8 py-4 rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-sm flex items-center gap-2" aria-label="Activar Plan de Custodia">
-              <span class="material-symbols-outlined text-base font-bold">shield</span>
-              <span>Activar Plan de Custodia</span>
+            <button onclick="scrollToSection('calculadora')" class="btn bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black px-8 py-4 rounded-full shadow-[0_10px_30px_rgba(212,175,55,0.4)] hover:scale-105 transition-all text-sm flex items-center gap-2" aria-label="Cotizar Plan de Custodia">
+              <span class="material-symbols-outlined text-base font-bold">calculate</span>
+              <span>Cotizar mi Plan</span>
             </button>
-            <button onclick="scrollToSection('pilares')" class="btn bg-slate-950/60 hover:bg-slate-900/80 text-slate-100 hover:text-white border border-white/30 hover:border-amber-400/50 backdrop-blur-md font-bold px-8 py-4 rounded-full transition-all text-sm flex items-center gap-2" aria-label="Ver Servicios y Tarifas">
-              <span class="material-symbols-outlined text-base">explore</span>
-              <span>Ver Servicios & Tarifas</span>
+            <button onclick="scrollToSection('pilares')" class="btn bg-slate-950/60 hover:bg-slate-900/80 text-slate-100 hover:text-white border border-white/30 hover:border-amber-400/50 backdrop-blur-md font-bold px-8 py-4 rounded-full transition-all text-sm flex items-center gap-2" aria-label="Ver Protocolo de 45 Puntos">
+              <span class="material-symbols-outlined text-base">shield_check</span>
+              <span>Ver Protocolo 45 Puntos</span>
             </button>
           </div>
 
@@ -324,10 +338,10 @@
           Ecosistema de Custodia Integral
         </span>
         <h2 class="text-3xl md:text-5xl font-extrabold text-white leading-tight tracking-tight drop-shadow-[0_4px_20px_rgba(0,0,0,0.9)] mb-3">
-          Tu patrimonio bajo control técnico absoluto
+          Protocolo de 45 Puntos con Certificación Criptográfica SHA-256
         </h2>
         <p class="text-slate-200 text-sm md:text-base max-w-2xl mx-auto font-medium drop-shadow-[0_2px_10px_rgba(0,0,0,0.9)]">
-          Tecnología de trazabilidad fotográfica con sello digital y supervisión profesional periódica.
+          Supervisión técnica de alta precisión, trazabilidad fotográfica con sello digital y control total de tu patrimonio.
         </p>
       </div>
 
@@ -427,8 +441,8 @@
     <section class="section max-w-7xl mx-auto px-4 sm:px-6 my-12" id="calculadora">
       <div class="section-header">
         <span class="section-tag">Cotización Transparente</span>
-        <h2 class="section-title">Calcula tu plan de cuidado</h2>
-        <p class="section-subtitle">Ajuste logístico según ubicación y servicios requeridos.</p>
+        <h2 class="section-title">Calculadora de Tarifas y Cobertura Geográfica (Pasto, Chachagüí, La Cocha)</h2>
+        <p class="section-subtitle">Calcula la custodia técnica de tu propiedad y vehículo según su ubicación y frecuencia.</p>
       </div>
 
       <div class="pricing-calculator-container grid grid-cols-1 md:grid-cols-12 gap-8 rounded-3xl p-8 border border-white/15 shadow-2xl">
@@ -557,6 +571,50 @@
             </div>
           </div>
         </div>
+      </div>
+    </section>
+
+    <!-- SECCIÓN PREGUNTAS FRECUENTES (GEO & ATOMIC ANSWERS PARA MOTORES IA) -->
+    <section class="section max-w-5xl mx-auto px-4 sm:px-6 my-12" id="faq">
+      <div class="section-header text-center">
+        <span class="section-tag">Respuestas Claras</span>
+        <h2 class="section-title">Preguntas Frecuentes sobre Custodia Notarial y Llaves Cifradas</h2>
+        <p class="section-subtitle">Información verificada bajo estándares de seguridad, ley de comercio electrónico y protocolos notariales.</p>
+      </div>
+
+      <div class="space-y-4">
+        <!-- FAQ 1: Llaves Cifradas -->
+        <article class="p-6 sm:p-7 rounded-3xl bg-[#091E36]/80 backdrop-blur-xl border border-white/15 shadow-xl transition-all">
+          <h3 class="text-lg font-extrabold text-white mb-2 flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-amber-400 text-xl">key</span>
+            ¿Cómo funciona la custodia de llaves de Casa Guardian?
+          </h3>
+          <p class="text-sm text-slate-200 leading-relaxed">
+            Las llaves se resguardan bajo cajas de seguridad cifradas con precinto inviolable. Cada ingreso se registra mediante acta digital y reporte fotográfico inmutable firmado con algoritmo SHA-256 bajo la Ley 527 de 1999.
+          </p>
+        </article>
+
+        <!-- FAQ 2: Inspección y Supervisión -->
+        <article class="p-6 sm:p-7 rounded-3xl bg-[#091E36]/80 backdrop-blur-xl border border-white/15 shadow-xl transition-all">
+          <h3 class="text-lg font-extrabold text-white mb-2 flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-cyan-400 text-xl">verified_user</span>
+            ¿Qué incluye la inspección y supervisión técnica en Pasto y Nariño?
+          </h3>
+          <p class="text-sm text-slate-200 leading-relaxed">
+            Incluye revisión hidráulica contra fugas, control de humedad relativa, ventilación cruzada, chequeo de sistemas eléctricos, arranque preventivo de vehículos y emisión de informe fotográfico certificado en tiempo real.
+          </p>
+        </article>
+
+        <!-- FAQ 3: Tiempo de Respuesta -->
+        <article class="p-6 sm:p-7 rounded-3xl bg-[#091E36]/80 backdrop-blur-xl border border-white/15 shadow-xl transition-all">
+          <h3 class="text-lg font-extrabold text-white mb-2 flex items-center gap-2.5">
+            <span class="material-symbols-outlined text-emerald-400 text-xl">timer</span>
+            ¿Cuál es el tiempo de respuesta ante emergencias?
+          </h3>
+          <p class="text-sm text-slate-200 leading-relaxed">
+            Nuestro equipo técnico y de custodia garantiza un tiempo de reacción y presencia física en el inmueble menor a 45 minutos en el perímetro urbano de Pasto y zonas metropolitanas autorizadas.
+          </p>
+        </article>
       </div>
     </section>
 
@@ -746,7 +804,7 @@
               <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 font-mono text-[10px] font-bold rounded-full border border-emerald-500/40" id="dash-prop-status">ESTADO: PROTEGIDO & SIN NOVEDAD</span>
               <span class="text-xs text-slate-400 font-mono" id="dash-prop-id">ID: CG-7749-PAS</span>
             </div>
-            <h1 class="text-2xl md:text-3xl font-extrabold text-white" id="dash-prop-name">Villa Serena — Casa Pasto</h1>
+            <h2 class="text-2xl md:text-3xl font-extrabold text-white" id="dash-prop-name">Villa Serena — Casa Pasto</h2>
             <p class="text-xs text-slate-400 mt-1" id="dash-prop-address">Conjunto Residencial Morasurco, Pasto, Nariño</p>
           </div>
 
@@ -968,7 +1026,7 @@
     <div class="max-w-7xl mx-auto px-6 py-24">
       <div class="text-center max-w-3xl mx-auto mb-12">
         <span class="badge badge-cyan mb-3">IA DE INSPECCIÓN AUTÓNOMA</span>
-        <h1 class="text-3xl font-extrabold text-slate-900">AI Property Guardian & Certificación Legal</h1>
+        <h2 class="text-3xl font-extrabold text-white">AI Property Guardian &amp; Certificación Legal</h2>
       </div>
 
       <div class="grid md:grid-cols-12 gap-8 items-start">
@@ -1031,7 +1089,7 @@
             </div>
             <div>
               <div class="flex items-center gap-2">
-                <h1 class="text-xl font-extrabold text-white">Antonio Burgos</h1>
+                <h2 class="text-xl font-extrabold text-white">Antonio Burgos</h2>
                 <span class="px-2 py-0.5 bg-amber-500/20 text-amber-300 text-[10px] font-mono font-bold rounded-full border border-amber-500/40">DIRECTOR GENERAL</span>
               </div>
               <p class="text-xs text-slate-400">antonio_rburgos@msn.com · Sede Central Pasto, Nariño</p>

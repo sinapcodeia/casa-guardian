@@ -141,6 +141,28 @@ body {
   overflow-x: hidden;
 }
 
+/* ==========================================================================
+   HERO SCRIM OVERLAY & MODERN BALANCED TYPOGRAPHY (WCAG 2.2 AA & CRO)
+   ========================================================================== */
+.hero-container {
+  position: relative;
+  isolation: isolate;
+}
+
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(6, 19, 37, 0.78) 0%, rgba(6, 19, 37, 0.42) 55%, #061325 100%);
+  z-index: 1;
+  pointer-events: none;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 2;
+  text-wrap: balance;
+}
+
 :focus-visible {
   outline: 3px solid var(--cyan-base);
   outline-offset: 2px;
