@@ -285,17 +285,16 @@ a:hover {
 }
 
 .hero-dynamic-serif {
-  font-family: 'Cormorant Garamond', Georgia, serif;
+  font-family: 'Playfair Display', 'Cormorant Garamond', Georgia, serif;
   font-style: italic;
-  font-weight: 700;
+  font-weight: 800;
   letter-spacing: -0.01em;
-  color: #D4AF37;
-  background: linear-gradient(135deg, #FF6E54 0%, #D4AF37 50%, #00B4D8 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+  background: linear-gradient(90deg, #FF6F43 0%, #F59E0B 35%, #10B981 70%, #00B4D8 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
   display: inline-block;
-  padding: 0 0.1em;
-  min-width: 80px;
+  padding: 0 0.05em;
+  transition: opacity 0.22s cubic-bezier(0.16, 1, 0.3, 1), transform 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 /* SECCIONES Y CABECERAS CORTAS Y ELEGANTES FLOTANTES CON AMPLIA SEPARACIÓN */
