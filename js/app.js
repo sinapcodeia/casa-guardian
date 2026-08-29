@@ -1210,7 +1210,7 @@ function fallbackManualDocPrompt() {
 }
 
 /* ==========================================================================
-   GENERADOR DE PROPUESTA FORMAL DE CUSTODIA (DESCARGABLE / IMPRIMIBLE)
+   GENERADOR DE PROPUESTA FORMAL DE CUSTODIA (PDF OFICIAL CON VALIDEZ LEGAL)
    ========================================================================== */
 window.downloadCustodyProposal = function() {
   const planName = document.getElementById('calc-plan-name')?.textContent || 'PLAN CARE';
@@ -1221,67 +1221,145 @@ window.downloadCustodyProposal = function() {
   const freq = document.getElementById('calc-frequency')?.selectedOptions[0]?.text || 'Quincenal (2 visitas / mes)';
   const vehicle = document.getElementById('calc-vehicle-care')?.selectedOptions[0]?.text || 'Ninguno';
   const today = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+  const radicado = `PROP-2026-${Math.floor(1000 + Math.random() * 9000)}-PAS`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent('https://casa-guardian.vercel.app/?propuesta=' + radicado)}&bgcolor=ffffff&color=08182b&margin=2`;
 
-  const content = `================================================================================
-CASA GUARDIAN — PROPUESTA FORMAL DE CUSTODIA TÉCNICA INMOBILIARIA & VEHICULAR
-Sede Central: Pasto, Nariño, Colombia · https://casa-guardian.vercel.app/
-Fecha de Emisión: ${today}
-================================================================================
+  const proposalHtml = `
+    <!DOCTYPE html>
+    <html lang="es">
+    <head>
+      <meta charset="UTF-8">
+      <title>Propuesta Formal de Custodia ${radicado} — CASA GUARDIAN</title>
+      <style>
+        @page { size: A4 portrait; margin: 12mm; }
+        body { font-family: 'Helvetica Neue', Arial, sans-serif; color: #0F172A; background: #FFFFFF; padding: 20px; line-height: 1.45; }
+        .notarial-border { border: 3px double #D4AF37; padding: 28px; border-radius: 12px; background: #FFFCF7; position: relative; }
+        .header { text-align: center; border-bottom: 2px solid #0F172A; padding-bottom: 14px; margin-bottom: 18px; }
+        .gold-sub { font-size: 10px; font-weight: bold; letter-spacing: 2.5px; color: #B45309; text-transform: uppercase; margin-top: 5px; }
+        .doc-badge { display: inline-block; background: #061325; color: #F59E0B; padding: 4px 12px; border-radius: 6px; font-family: monospace; font-size: 11px; font-weight: bold; margin-top: 8px; }
+        .title { font-size: 17px; font-weight: 800; text-transform: uppercase; color: #0F172A; margin: 12px 0 4px 0; }
+        .meta-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; background: #F1F5F9; padding: 12px; border-radius: 8px; font-size: 11px; margin: 14px 0; border: 1px solid #CBD5E1; }
+        .plan-summary-card { background: #061325; color: #FFFFFF; padding: 16px; border-radius: 10px; border: 1px solid #D4AF37; margin: 15px 0; display: flex; justify-content: space-between; align-items: center; }
+        .plan-price-cop { font-size: 22px; font-weight: 900; color: #F59E0B; }
+        .plan-price-usd { font-size: 12px; color: #38BDF8; font-family: monospace; }
+        .scope-box { font-size: 11px; color: #334155; margin: 14px 0; line-height: 1.55; }
+        .scope-box h4 { font-size: 12px; font-weight: 800; color: #0F172A; text-transform: uppercase; margin: 10px 0 4px 0; border-bottom: 1px solid #E2E8F0; padding-bottom: 3px; }
+        .scope-box ul { margin: 4px 0 8px 18px; padding: 0; }
+        .qr-section { display: flex; align-items: center; justify-content: space-between; background: #FFFFFF; border: 1px solid #E2E8F0; padding: 12px 16px; border-radius: 10px; margin: 15px 0; }
+        .legal-notice { font-size: 10px; color: #64748B; line-height: 1.5; border-top: 1px solid #CBD5E1; padding-top: 10px; margin-top: 12px; }
+        .footer { display: flex; justify-content: space-between; align-items: center; margin-top: 25px; border-top: 1px solid #CBD5E1; padding-top: 14px; font-size: 10px; color: #475569; }
+        .stamp { border: 2px dashed #D4AF37; padding: 6px 12px; text-align: center; border-radius: 8px; font-weight: bold; color: #B45309; }
+        @media print {
+          body { padding: 0; }
+          .no-print { display: none; }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="notarial-border">
+        <div class="header">
+          <img src="img/logo.jpg" alt="Casa Guardian Logo Oficial" style="max-height: 70px; margin-bottom: 6px; border-radius: 8px;">
+          <div class="gold-sub">CUSTODIA TÉCNICA PREVENTIVA & SUPERVISIÓN INMOBILIARIA NOTARIAL</div>
+          <div class="doc-badge">RADICADO DE PROPUESTA Nº ${radicado}</div>
+          <div class="title">Propuesta Formal de Custodia &amp; Protocolo 45 Puntos</div>
+        </div>
 
-1. RESUMEN EJECUTIVO DE LA PROPUESTA
---------------------------------------------------------------------------------
-• Inmueble / Activo:   ${propType}
-• Zona Geográfica:     ${zone}
-• Esquema Contratado:  ${planName}
-• Frecuencia Visitas:  ${freq}
-• Cobertura Vehicular: ${vehicle}
-• Inversión Mensual:   ${priceCop} (${priceUsd})
+        <div class="meta-grid">
+          <div><strong>Activo a Custodiar:</strong> ${propType}</div>
+          <div><strong>Zona Geográfica:</strong> ${zone} (Nariño)</div>
+          <div><strong>Frecuencia de Supervisión:</strong> ${freq}</div>
+          <div><strong>Cuidado Vehicular:</strong> ${vehicle}</div>
+          <div><strong>Fecha de Expedición:</strong> ${today}</div>
+          <div><strong>Vigencia de la Oferta:</strong> 30 días calendario</div>
+        </div>
 
-2. ALCANCE TÉCNICO & PROTOCOLO 45 PUNTOS
---------------------------------------------------------------------------------
-1. INSPECCIÓN HÍDRICA:
-   - Control preventivo contra fugas no detectadas y prueba de presión.
-   - Purga de sifones y verificación de llaves de paso principales.
+        <div class="plan-summary-card">
+          <div>
+            <span style="font-size: 10px; font-weight: bold; color: #F59E0B; text-transform: uppercase; letter-spacing: 1px;">ESQUEMA DE COBERTURA SELECCIONADO</span>
+            <div style="font-size: 18px; font-weight: 800; margin-top: 2px;">${planName}</div>
+            <div style="font-size: 10px; color: #94A3B8;">Protocolo integral de habitabilidad, prevención hídrica y telemetría.</div>
+          </div>
+          <div style="text-align: right;">
+            <div class="plan-price-cop">${priceCop}</div>
+            <div class="plan-price-usd">${priceUsd}</div>
+          </div>
+        </div>
 
-2. CONTROL PREVENTIVO DE HUMEDAD & CLIMA:
-   - Medición de humedad relativa (%) y ciclos de ventilación cruzada de 30-45 min.
-   - Prevención de hongos, moho y deterioro de cielorrasos y maderas nobles.
+        <div class="scope-box">
+          <h4>1. Inspección de Redes Hídricas & Detección de Humedad</h4>
+          <ul>
+            <li>Verificación de presión hidrostática (PSI) y monitoreo contra micro-fugas silenciosas.</li>
+            <li>Purga periódica de sifones y trampas de olor para evitar gases en tuberías secas.</li>
+            <li>Medición de humedad relativa (%) con higrómetros calibrados y ciclos de ventilación cruzada anti-moho.</li>
+          </ul>
 
-3. REVISIÓN DE SISTEMA ELÉCTRICO:
-   - Verificación de breakers principales y balance de cargas.
-   - Resguardo de circuitos para refrigeración y telemetría activa.
+          <h4>2. Seguridad Física & Bóveda Notarial de Llaves</h4>
+          <ul>
+            <li>Resguardo de llaves bajo precinto numerado inviolable en Bóveda Central de Seguridad.</li>
+            <li>Apertura y cierre registrados mediante acta digital pericial inmutable con firma SHA-256.</li>
+            <li>Revisión de cerraduras, pasadores, puertas perimetrales y ventanas de acceso.</li>
+          </ul>
 
-4. CUSTODIA Y BÓVEDA NOTARIAL DE LLAVES:
-   - Resguardo de llaves bajo precinto numerado inviolable en Bóveda Central.
-   - Apertura registrada bajo acta digital inmutable (Ley 527 de 1999).
+          <h4>3. Redes Eléctricas & Mantenimiento Vehicular en Garaje</h4>
+          <ul>
+            <li>Chequeo termográfico de tableros de breakers y aseguramiento de circuitos de refrigeración.</li>
+            <li>Arranque preventivo de vehículo por 20 min en cada visita, test de batería (12V) y calibración de neumáticos.</li>
+          </ul>
+        </div>
 
-5. CUIDADO VEHICULAR EN GARAJE (SEGÚN SELECCIÓN):
-   - Ciclo de calentamiento de motor por 20 minutos en cada inspección periódica.
-   - Calibración de presión de neumáticos y estado de batería (12V).
+        <div class="qr-section">
+          <div style="font-size: 11px; max-width: 440px;">
+            <strong style="color: #0F172A; text-transform: uppercase;">Validez Probatoria & Verificación Digital:</strong>
+            <p style="margin: 3px 0 0 0; color: #64748B; font-size: 10px; line-height: 1.4;">
+              Este documento cuenta con sello criptográfico registrado. Puedes escanear el código QR adjunto con cualquier smartphone para validar la autenticidad de la propuesta en la nube oficial de Casa Guardian.
+            </p>
+          </div>
+          <div style="text-align: center; border-left: 1px solid #E2E8F0; padding-left: 16px;">
+            <img src="${qrUrl}" alt="QR Verificación Propuesta" style="width: 75px; height: 75px; border-radius: 6px; border: 1px solid #CBD5E1;">
+            <div style="font-size: 8px; font-family: monospace; color: #B45309; font-weight: bold; margin-top: 2px;">QR NOTARIAL</div>
+          </div>
+        </div>
 
-3. DICTAMEN DE CONTRATACIÓN & VALIDEZ JURÍDICA
---------------------------------------------------------------------------------
-El presente presupuesto tiene una vigencia de treinta (30) días calendario a partir
-de su fecha de emisión. La activación del servicio formaliza mediante Contrato de
-Custodia Privada y Acta Notarial de Entrega de Llaves con firma digital o presencial.
+        <div class="legal-notice">
+          <strong>MARCO JURÍDICO APLICABLE:</strong> La presente oferta se emite conforme a la Ley 527 de 1999 sobre Comercio Electrónico y Firmas Digitales, el Art. 243 del Código General del Proceso (Eficacia Probatoria) y la Ley 1581 de 2012 de Protección de Datos Personales. Casa Guardian actúa como empresa de custodia técnica y no asume responsabilidades de aseguradora ni servicios de socorro público.
+        </div>
 
-Para formalizar o agendar la inspección técnica inicial, comuníquese con nuestra
-dirección operativa en Pasto:
-WhatsApp Corporativo: +57 300 000 0000
-Portal Web: https://casa-guardian.vercel.app/
+        <div class="footer">
+          <div>
+            <strong>Antonio Burgos</strong><br>
+            Director General de Operaciones<br>
+            CASA GUARDIAN · Pasto, Nariño<br>
+            WhatsApp: +57 300 000 0000
+          </div>
+          <div class="stamp">
+            ⚖️ PROPUESTA OFICIAL<br>
+            CERTIFICACIÓN DIGITAL<br>
+            <strong>SINAPCODE TECH</strong>
+          </div>
+          <div style="text-align: right;">
+            <strong>Aceptación del Cliente:</strong><br>
+            Firma / Cédula: ________________________<br>
+            Fecha de Activación: ____________________
+          </div>
+        </div>
+      </div>
 
-CASA GUARDIAN — PASTO, NARIÑO
-"Tú viajas. Nosotros cuidamos tu Patrimonio."
-================================================================================`;
+      <script>
+        window.onload = function() {
+          setTimeout(function() { window.print(); }, 400);
+        };
+      </script>
+    </body>
+    </html>
+  `;
 
-  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
-  const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
-  a.download = `Propuesta_Custodia_CasaGuardian_${planName.replace(/\s+/g, '_')}.txt`;
-  document.body.appendChild(a);
-  a.click();
-  document.body.removeChild(a);
-  URL.revokeObjectURL(url);
+  const printWindow = window.open('', '_blank');
+  if (printWindow) {
+    printWindow.document.open();
+    printWindow.document.write(proposalHtml);
+    printWindow.document.close();
+  } else {
+    alert("Por favor permite las ventanas emergentes en tu navegador para generar y descargar tu Propuesta Formal en PDF.");
+  }
 };
 
