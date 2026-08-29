@@ -501,12 +501,22 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
-// Cerrar modal demo al hacer clic en el backdrop
+// Listeners de inicialización DOM
 document.addEventListener('DOMContentLoaded', () => {
   const demoModal = document.getElementById('demo-report-modal');
   if (demoModal) {
     demoModal.addEventListener('click', (e) => {
       if (e.target === demoModal) closeDemoReportModal();
+    });
+  }
+
+  const docSearchInput = document.getElementById('public-doc-search-input');
+  if (docSearchInput) {
+    docSearchInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        e.preventDefault();
+        window.verifyPublicDocument();
+      }
     });
   }
 });
@@ -882,4 +892,122 @@ function initHeroVideoScrollScrubbing() {
   window.addEventListener('scroll', updateTargetTime, { passive: true });
   window.addEventListener('resize', updateTargetTime, { passive: true });
 }
+
+/* ==========================================================================
+   VERIFICADOR PÚBLICO DE ACTAS & CERTIFICACIONES NOTARIALES (SHA-256)
+   ========================================================================== */
+window.setDocSearchAndVerify = function(code) {
+  const input = document.getElementById('public-doc-search-input');
+  if (input) input.value = code;
+  window.verifyPublicDocument(code);
+};
+
+window.verifyPublicDocument = function(overrideQuery) {
+  const input = document.getElementById('public-doc-search-input');
+  const resultContainer = document.getElementById('public-doc-result');
+  if (!resultContainer) return;
+
+  const query = (overrideQuery || input?.value || '').trim().toLowerCase();
+  if (!query) {
+    resultContainer.classList.remove('hidden');
+    resultContainer.innerHTML = `
+      <div class="p-4 rounded-2xl bg-amber-500/10 border border-amber-500/30 text-xs text-amber-300 flex items-center gap-2">
+        <span class="material-symbols-outlined text-base">info</span>
+        <span>Por favor ingrese un número de radicado (ej. <strong>DOC-NOT-001</strong>) o un Hash SHA-256.</span>
+      </div>
+    `;
+    return;
+  }
+
+  let docs = [];
+  if (window.CasaGuardianDocs && typeof window.CasaGuardianDocs.getDocuments === 'function') {
+    docs = window.CasaGuardianDocs.getDocuments();
+  }
+
+  const found = docs.find(d => 
+    (d.docId && d.docId.toLowerCase() === query) ||
+    (d.hash && d.hash.toLowerCase() === query) ||
+    (d.clientRef && d.clientRef.toLowerCase() === query)
+  );
+
+  resultContainer.classList.remove('hidden');
+
+  if (found) {
+    resultContainer.innerHTML = `
+      <div class="p-5 sm:p-6 rounded-2xl bg-[#0B1E33] border border-emerald-500/40 shadow-2xl text-xs space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+          <div class="flex items-center gap-2">
+            <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
+            <span class="font-extrabold text-emerald-300 uppercase tracking-wide">Acta Auténtica · Validez Notarial Verificada</span>
+          </div>
+          <span class="px-2.5 py-0.5 bg-emerald-500/20 text-emerald-300 font-mono text-[11px] font-bold rounded-full border border-emerald-500/40">
+            ${found.status || 'Custodiado & Sellado'}
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
+          <div>
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Radicado & Categoría</span>
+            <span class="text-white font-bold text-sm">${found.docId}</span> · <span class="text-amber-300 font-medium">${found.category} (${found.version})</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Titular / Inmueble</span>
+            <span class="text-white font-bold">${found.clientName}</span> <span class="text-slate-400 font-mono text-[11px]">(${found.clientRef})</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Fecha & Hora de Sellado</span>
+            <span class="text-white font-mono">${found.timestamp}</span>
+          </div>
+          <div>
+            <span class="text-slate-400 text-[10px] uppercase font-bold block">Jurisdicción & Notaría</span>
+            <span class="text-white">${found.jurisdiction}</span>
+          </div>
+        </div>
+
+        <div class="p-3 bg-black/50 rounded-xl border border-white/10 space-y-1">
+          <span class="text-slate-400 text-[10px] uppercase font-bold block font-mono">Sello Criptográfico SHA-256 (Inmutable)</span>
+          <div class="font-mono text-[11px] text-amber-300 break-all select-all font-semibold">
+            ${found.hash}
+          </div>
+          <div class="text-[10px] text-slate-400 pt-1 border-t border-white/10 mt-1">
+            ⚖️ ${found.compliance || 'Ley 527 de 1999 de Comercio Electrónico & Código General del Proceso Art. 243'}
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+          <span class="text-[11px] text-slate-400">Certificado emitido bajo custodia de Casa Guardian en Pasto, Nariño.</span>
+          <button 
+            type="button" 
+            onclick="downloadFoundDoc('${found.docId}')"
+            class="px-4 py-2 bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold rounded-xl text-xs flex items-center gap-1.5 transition-all cursor-pointer shadow-md"
+          >
+            <span class="material-symbols-outlined text-sm">download</span>
+            <span>Descargar Acta Forense (.txt)</span>
+          </button>
+        </div>
+      </div>
+    `;
+  } else {
+    resultContainer.innerHTML = `
+      <div class="p-5 rounded-2xl bg-red-500/10 border border-red-500/30 text-xs text-slate-200 space-y-2">
+        <div class="flex items-center gap-2 text-red-400 font-bold text-sm">
+          <span class="material-symbols-outlined text-lg">error</span>
+          <span>Instrumento No Encontrado en Bóveda Oficial</span>
+        </div>
+        <p class="text-slate-300 leading-relaxed">
+          El radicado o hash <code>"${query}"</code> no coincide con ningún documento registrado en el libro de actas de Casa Guardian. Verifique si el código fue digitado correctamente o consulte con su asesor de custodia.
+        </p>
+      </div>
+    `;
+  }
+};
+
+window.downloadFoundDoc = function(docId) {
+  if (window.CasaGuardianDocs && typeof window.CasaGuardianDocs.getDocuments === 'function') {
+    const doc = window.CasaGuardianDocs.getDocuments().find(d => d.docId === docId);
+    if (doc && typeof window.CasaGuardianDocs.downloadOfficialDocument === 'function') {
+      window.CasaGuardianDocs.downloadOfficialDocument(doc);
+    }
+  }
+};
 
