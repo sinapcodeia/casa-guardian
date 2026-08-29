@@ -413,6 +413,61 @@ window.closePrivacyModal = function() {
   }
 };
 
+/* --------------------------------------------------------------------------
+   MODAL DE REPORTE DEMO INTERACTIVO & VERIFICADOR CRIPTOGRÁFICO (SHOW, DON'T TELL)
+   -------------------------------------------------------------------------- */
+window.openDemoReportModal = function() {
+  const modal = document.getElementById('demo-report-modal');
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+    switchDemoTab('telemetria');
+  }
+};
+
+window.closeDemoReportModal = function() {
+  const modal = document.getElementById('demo-report-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+};
+
+window.switchDemoTab = function(tabName) {
+  const panels = document.querySelectorAll('.demo-tab-panel');
+  panels.forEach(p => p.classList.add('hidden'));
+
+  const activePanel = document.getElementById(`demo-tab-${tabName}`);
+  if (activePanel) activePanel.classList.remove('hidden');
+
+  const tabBtns = document.querySelectorAll('.demo-tab-btn');
+  tabBtns.forEach(btn => {
+    btn.classList.remove('bg-amber-400', 'text-slate-950');
+    btn.classList.add('bg-white/5', 'text-slate-300');
+  });
+
+  const activeBtn = document.getElementById(`demo-tab-${tabName}-btn`);
+  if (activeBtn) {
+    activeBtn.classList.remove('bg-white/5', 'text-slate-300');
+    activeBtn.classList.add('bg-amber-400', 'text-slate-950');
+  }
+};
+
+window.verifyDemoHash = function() {
+  const btn = document.getElementById('verify-demo-hash-btn');
+  const result = document.getElementById('demo-hash-result');
+  if (!btn || !result) return;
+
+  btn.disabled = true;
+  btn.innerHTML = `<span class="material-symbols-outlined text-base animate-spin">progress_activity</span><span>Consultando Bóveda Criptográfica...</span>`;
+
+  setTimeout(() => {
+    btn.disabled = false;
+    btn.innerHTML = `<span class="material-symbols-outlined text-base">verified</span><span>Verificar Autenticidad en Bóveda Notarial</span>`;
+    result.classList.remove('hidden');
+  }, 650);
+};
+
 window.handleDigitalCheckout = function() {
   const planName = document.getElementById('calc-plan-name')?.textContent || 'PLAN CARE';
   const priceCop = document.getElementById('calc-price-cop')?.textContent || '$320.000 COP / mes';
@@ -439,9 +494,20 @@ document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') {
     closeAuthModal();
     closePrivacyModal();
+    closeDemoReportModal();
     if (window.CasaGuardianOperator && typeof window.CasaGuardianOperator.closeInspectionTerminal === 'function') {
       window.CasaGuardianOperator.closeInspectionTerminal();
     }
+  }
+});
+
+// Cerrar modal demo al hacer clic en el backdrop
+document.addEventListener('DOMContentLoaded', () => {
+  const demoModal = document.getElementById('demo-report-modal');
+  if (demoModal) {
+    demoModal.addEventListener('click', (e) => {
+      if (e.target === demoModal) closeDemoReportModal();
+    });
   }
 });
 
