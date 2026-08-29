@@ -26,6 +26,7 @@ const DEFAULT_PROPERTIES = {
     score: 98,
     status: "ESTADO: PROTEGIDO & SIN NOVEDAD",
     lastInspection: "Hoy, 10:30 AM",
+    nextInspection: "Lunes 31 Ago, 10:00 AM",
     water: "Sin Fugas (OK)",
     power: "Breakers Normal (118 V)",
     security: "Intactas (Precinto OK)",
@@ -35,6 +36,12 @@ const DEFAULT_PROPERTIES = {
     officer: "Sargento (R) Jairo Muñoz",
     officerPhone: "573000000000",
     hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    timeline: [
+      { date: "31 Ago 2026", time: "10:00 AM", status: "upcoming", title: "Próxima Inspección Programada", desc: "Ruta Morasurco · Oficial Sgt. Jairo Muñoz. Verificación de 45 puntos y purga hídrica." },
+      { date: "24 Ago 2026", time: "10:30 AM", status: "completed", title: "Inspección Periódica 45 Puntos", desc: "Sin anomalías. Score 98%. Telemetría hídrica y encendido de camioneta 20 min completado.", hash: "9a2f12b67c3391d8e09f8721c456a9081e6b34fa88921b778c1044958821b001" },
+      { date: "17 Ago 2026", time: "11:15 AM", status: "completed", title: "Ventilación & Control de Humedad", desc: "Ventilación cruzada 45 min. Humedad relativa regulada a 21% anti-moho.", hash: "5a1c12b67c3391d8e09f8721c456a9081e6b34fa88921b778c1044958821a110" },
+      { date: "10 Ago 2026", time: "16:45 PM", status: "completed", title: "Recepción de Llaves & Sellado Bóveda", desc: "Acta notarial firmada en Notaría 2da de Pasto. Precinto PR-8821 en BOX-001.", hash: "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855" }
+    ],
     photos: [
       { url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80", tag: "📷 Fachada & Ventanas [GPS: 1.2136, -77.2811]" },
       { url: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=600&q=80", tag: "📷 Sala Principal & Techos [Humedad 21%]" },
@@ -60,6 +67,7 @@ const DEFAULT_PROPERTIES = {
     score: 94,
     status: "ESTADO: REVISIÓN SUGERIDA",
     lastInspection: "Ayer, 03:15 PM",
+    nextInspection: "Jueves 3 Sep, 02:30 PM",
     water: "💧 Mantenimiento a Bomba",
     power: "Normal (118 V)",
     security: "🔐 Cerramiento Perimetral OK",
@@ -69,6 +77,11 @@ const DEFAULT_PROPERTIES = {
     officer: "Oficial Andrés Bolaños",
     officerPhone: "573100000000",
     hash: "8f4a12b67c3391d8e09f8721c456a9081e6b34fa88921b778c1044958821a990",
+    timeline: [
+      { date: "03 Sep 2026", time: "02:30 PM", status: "upcoming", title: "Próxima Inspección Campestre", desc: "Revisión de cercas perimetrales, motobomba y prueba de generador auxiliar." },
+      { date: "26 Ago 2026", time: "03:15 PM", status: "completed", title: "Supervisión Perimetral & Aleros", desc: "Inspección de drenajes y encendido de camioneta 4x4.", hash: "8f4a12b67c3391d8e09f8721c456a9081e6b34fa88921b778c1044958821a990" },
+      { date: "05 Ago 2026", time: "11:00 AM", status: "completed", title: "Sellado de Bóveda BOX-004", desc: "Firma notarial y resguardo de llaves con precinto PR-9014.", hash: "4d77c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852c444" }
+    ],
     photos: [
       { url: "https://images.unsplash.com/photo-1500382017468-9049fed747ef?auto=format&fit=crop&w=600&q=80", tag: "🌿 Terrenos & Jardines [Cercos OK]" },
       { url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=600&q=80", tag: "🏡 Casa Principal [Puertas Aseguradas]" },
@@ -92,6 +105,7 @@ const DEFAULT_PROPERTIES = {
     score: 96,
     status: "ESTADO: PROTEGIDO & SIN NOVEDAD",
     lastInspection: "22 Ago, 11:00 AM",
+    nextInspection: "Sábado 5 Sep, 11:00 AM",
     water: "Presión 40 PSI Normal",
     power: "Planta Eléctrica OK",
     security: "🔐 Cerraduras Blindadas OK",
@@ -101,6 +115,11 @@ const DEFAULT_PROPERTIES = {
     officer: "Oficial Javier Benavides",
     officerPhone: "573200000000",
     hash: "3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1",
+    timeline: [
+      { date: "05 Sep 2026", time: "11:00 AM", status: "upcoming", title: "Próxima Inspección Lacustre", desc: "Revisión de deshumidificadores y control de humedad de maderas." },
+      { date: "22 Ago 2026", time: "11:00 AM", status: "completed", title: "Inspección Periódica La Cocha", desc: "Revisión térmica, chimenea y sellado de accesos.", hash: "3c9909afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab1c1" },
+      { date: "12 Ago 2026", time: "09:30 AM", status: "completed", title: "Protocolo de Recepción Lacustre", desc: "Acta de custodia notarial y verificación de planta eléctrica.", hash: "7c1209afec25354d551dae21590bb26e38d53f2173b8d3dc3eee4c047e7ab999" }
+    ],
     photos: [
       { url: "https://images.unsplash.com/photo-1600566753376-12c8ab7fb75b?auto=format&fit=crop&w=600&q=80", tag: "🌲 Vista Panorámica al Lago" },
       { url: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=80", tag: "🔥 Chimenea & Aislamiento Térmico" },
@@ -216,6 +235,9 @@ function updateDashboardUI(propKey) {
 
   // Update Repairs Section
   renderRepairsSection(data.repairs);
+
+  // Update Timeline Section
+  renderTimelineSection(data);
 
   // Update Certificate Info
   setTxt('cert-hash-val', data.hash);
@@ -572,6 +594,56 @@ window.downloadWorkOrderDoc = function(repId, encodedTitle, cost, propName, cont
     alert("Por favor permite las ventanas emergentes en tu navegador para generar y descargar tu Orden de Trabajo.");
   }
 };
+
+/**
+ * RENDERIZA EL TIMELINE CRONOLÓGICO DE CUSTODIA & PRÓXIMAS VISITAS
+ */
+function renderTimelineSection(data) {
+  const container = document.getElementById('dash-timeline-container');
+  const nextBadge = document.getElementById('dash-next-inspection-badge');
+  if (nextBadge) nextBadge.textContent = data.nextInspection || 'Lunes 31 Ago, 10:00 AM';
+  if (!container) return;
+
+  const events = data.timeline || [];
+  if (events.length === 0) {
+    container.innerHTML = `<div class="text-xs text-slate-400">Sin eventos registrados en el timeline.</div>`;
+    return;
+  }
+
+  container.innerHTML = events.map(ev => {
+    const isUpcoming = ev.status === 'upcoming';
+    const dotBg = isUpcoming ? 'bg-amber-400 border-amber-300' : 'bg-emerald-400 border-emerald-300';
+    const badgeColor = isUpcoming 
+      ? 'bg-amber-500/20 text-amber-300 border-amber-500/40' 
+      : 'bg-emerald-500/20 text-emerald-300 border-emerald-500/40';
+    
+    return `
+      <div class="relative group">
+        <div class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full ${dotBg} border-2 shadow-md"></div>
+        <div class="p-4 sm:p-5 rounded-2xl bg-slate-900/80 border border-slate-700/80 hover:border-slate-600 transition-all space-y-2">
+          <div class="flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2">
+              <span class="text-xs font-bold text-white">${ev.title}</span>
+              <span class="px-2 py-0.5 font-mono text-[10px] font-bold rounded-full border ${badgeColor}">
+                ${isUpcoming ? '🟡 PROGRAMADA' : '🟢 COMPLETADA'}
+              </span>
+            </div>
+            <span class="text-[11px] font-mono text-slate-400">${ev.date} · ${ev.time}</span>
+          </div>
+          <p class="text-xs text-slate-300 leading-relaxed">${ev.desc}</p>
+          ${ev.hash ? `
+            <div class="pt-2 border-t border-slate-800 flex flex-wrap items-center justify-between gap-2 text-[11px]">
+              <span class="font-mono text-slate-400">Hash: <span class="text-emerald-400 select-all">${ev.hash.substring(0, 24)}...</span></span>
+              <button type="button" onclick="window.setDocSearchAndVerify('${ev.hash}'); window.switchAppView('view-landing');" class="text-amber-400 hover:underline font-bold text-[10px] cursor-pointer">
+                Verificar Acta Notarial →
+              </button>
+            </div>
+          ` : ''}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
 
 /**
  * Control de Pestañas del Menú Lateral del Portal

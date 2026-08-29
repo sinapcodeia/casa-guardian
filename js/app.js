@@ -1209,3 +1209,79 @@ function fallbackManualDocPrompt() {
   }
 }
 
+/* ==========================================================================
+   GENERADOR DE PROPUESTA FORMAL DE CUSTODIA (DESCARGABLE / IMPRIMIBLE)
+   ========================================================================== */
+window.downloadCustodyProposal = function() {
+  const planName = document.getElementById('calc-plan-name')?.textContent || 'PLAN CARE';
+  const priceCop = document.getElementById('calc-price-cop')?.textContent || '$320.000 COP / mes';
+  const priceUsd = document.getElementById('calc-price-usd')?.textContent || '~ $80 USD / mes';
+  const propType = document.getElementById('calc-prop-type')?.selectedOptions[0]?.text || 'Casa Residencial';
+  const zone = document.getElementById('calc-zone')?.selectedOptions[0]?.text || 'Casco Urbano Pasto';
+  const freq = document.getElementById('calc-frequency')?.selectedOptions[0]?.text || 'Quincenal (2 visitas / mes)';
+  const vehicle = document.getElementById('calc-vehicle-care')?.selectedOptions[0]?.text || 'Ninguno';
+  const today = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
+
+  const content = `================================================================================
+CASA GUARDIAN — PROPUESTA FORMAL DE CUSTODIA TÉCNICA INMOBILIARIA & VEHICULAR
+Sede Central: Pasto, Nariño, Colombia · https://casa-guardian.vercel.app/
+Fecha de Emisión: ${today}
+================================================================================
+
+1. RESUMEN EJECUTIVO DE LA PROPUESTA
+--------------------------------------------------------------------------------
+• Inmueble / Activo:   ${propType}
+• Zona Geográfica:     ${zone}
+• Esquema Contratado:  ${planName}
+• Frecuencia Visitas:  ${freq}
+• Cobertura Vehicular: ${vehicle}
+• Inversión Mensual:   ${priceCop} (${priceUsd})
+
+2. ALCANCE TÉCNICO & PROTOCOLO 45 PUNTOS
+--------------------------------------------------------------------------------
+1. INSPECCIÓN HÍDRICA:
+   - Control preventivo contra fugas no detectadas y prueba de presión.
+   - Purga de sifones y verificación de llaves de paso principales.
+
+2. CONTROL PREVENTIVO DE HUMEDAD & CLIMA:
+   - Medición de humedad relativa (%) y ciclos de ventilación cruzada de 30-45 min.
+   - Prevención de hongos, moho y deterioro de cielorrasos y maderas nobles.
+
+3. REVISIÓN DE SISTEMA ELÉCTRICO:
+   - Verificación de breakers principales y balance de cargas.
+   - Resguardo de circuitos para refrigeración y telemetría activa.
+
+4. CUSTODIA Y BÓVEDA NOTARIAL DE LLAVES:
+   - Resguardo de llaves bajo precinto numerado inviolable en Bóveda Central.
+   - Apertura registrada bajo acta digital inmutable (Ley 527 de 1999).
+
+5. CUIDADO VEHICULAR EN GARAJE (SEGÚN SELECCIÓN):
+   - Ciclo de calentamiento de motor por 20 minutos en cada inspección periódica.
+   - Calibración de presión de neumáticos y estado de batería (12V).
+
+3. DICTAMEN DE CONTRATACIÓN & VALIDEZ JURÍDICA
+--------------------------------------------------------------------------------
+El presente presupuesto tiene una vigencia de treinta (30) días calendario a partir
+de su fecha de emisión. La activación del servicio formaliza mediante Contrato de
+Custodia Privada y Acta Notarial de Entrega de Llaves con firma digital o presencial.
+
+Para formalizar o agendar la inspección técnica inicial, comuníquese con nuestra
+dirección operativa en Pasto:
+WhatsApp Corporativo: +57 300 000 0000
+Portal Web: https://casa-guardian.vercel.app/
+
+CASA GUARDIAN — PASTO, NARIÑO
+"Tú viajas. Nosotros cuidamos tu Patrimonio."
+================================================================================`;
+
+  const blob = new Blob([content], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `Propuesta_Custodia_CasaGuardian_${planName.replace(/\s+/g, '_')}.txt`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+};
+
