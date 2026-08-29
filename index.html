@@ -1847,6 +1847,56 @@
   </div>
 
   <!-- ==========================================================================
+       MODAL DE VERIFICACIÓN DE PROPUESTA NOTARIAL (DISPARADO POR QR)
+       ========================================================================== -->
+  <div class="modal-overlay" id="proposal-verified-modal" role="dialog" aria-modal="true" aria-labelledby="proposal-verified-title">
+    <div class="modal-container max-w-lg w-full bg-[#08182B] border-2 border-amber-400/40 rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white text-center">
+      <button class="modal-close" onclick="closeProposalVerifiedModal()" aria-label="Cerrar Verificación">&times;</button>
+
+      <div class="w-16 h-16 rounded-2xl bg-emerald-500/15 border border-emerald-400/40 flex items-center justify-center text-emerald-400 text-3xl mx-auto mb-3 shadow-xl">
+        <span class="material-symbols-outlined">verified</span>
+      </div>
+
+      <span class="px-3 py-1 bg-emerald-500/20 text-emerald-300 font-mono text-xs font-bold rounded-full border border-emerald-500/40 inline-block mb-2">
+        ● PROPUESTA OFICIAL AUTÉNTICA & VIGENTE
+      </span>
+
+      <h3 class="text-xl sm:text-2xl font-black text-white" id="proposal-verified-title">Propuesta Notarial Verificada</h3>
+      <p class="text-xs text-slate-300 mt-1 mb-4">Este documento fue emitido oficialmente por los servidores de Casa Guardian bajo el protocolo de la Ley 527 de 1999.</p>
+
+      <div class="p-4 rounded-2xl bg-white/5 border border-white/10 text-left text-xs space-y-2 mb-5">
+        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+          <span class="text-slate-400 font-bold uppercase text-[10px]">Radicado Oficial:</span>
+          <span class="font-mono text-amber-300 font-bold text-sm" id="verified-proposal-radicado">PROP-2026-8821-PAS</span>
+        </div>
+        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+          <span class="text-slate-400 font-bold uppercase text-[10px]">Emisor Autorizado:</span>
+          <span class="text-white font-medium">Casa Guardian Pasto, Nariño</span>
+        </div>
+        <div class="flex justify-between items-center border-b border-white/10 pb-2">
+          <span class="text-slate-400 font-bold uppercase text-[10px]">Estado de Oferta:</span>
+          <span class="text-emerald-400 font-bold">Activa (Vigencia 30 Días)</span>
+        </div>
+        <div class="flex justify-between items-center">
+          <span class="text-slate-400 font-bold uppercase text-[10px]">Validez Jurídica:</span>
+          <span class="text-slate-300 text-[11px]">Ley 527/1999 & CGP Art. 243</span>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+        <button type="button" onclick="closeProposalVerifiedModal(); scrollToSection('calculadora');" class="py-3 px-4 bg-gradient-to-r from-amber-400 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all cursor-pointer shadow-lg">
+          <span class="material-symbols-outlined text-sm">calculate</span>
+          <span>Ver / Ajustar Plan</span>
+        </button>
+        <a id="verified-proposal-wa-btn" href="https://wa.me/573000000000?text=Hola%20Casa%20Guardian,%20he%20escaneado%20mi%20propuesta%20formal%20y%20deseo%20activar%20el%20servicio%20de%20custodia." target="_blank" class="py-3 px-4 bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-emerald-300 font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-all">
+          <span class="material-symbols-outlined text-sm">chat</span>
+          <span>Activar por WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
        CONCIERGE VIRTUAL 24/7 — ASISTENTE INTELIGENTE DE CUSTODIA (ASESORA EN VIVO)
        ========================================================================== -->
   <div class="concierge-trigger" onclick="toggleConciergeDrawer()" aria-label="Hablar con Asesora de Custodia 24/7">

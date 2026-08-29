@@ -496,11 +496,80 @@ document.addEventListener('keydown', (e) => {
     closePrivacyModal();
     closeDemoReportModal();
     if (typeof closeQrScannerModal === 'function') closeQrScannerModal();
+    if (typeof closeProposalVerifiedModal === 'function') closeProposalVerifiedModal();
     if (window.CasaGuardianOperator && typeof window.CasaGuardianOperator.closeInspectionTerminal === 'function') {
       window.CasaGuardianOperator.closeInspectionTerminal();
     }
   }
 });
+
+window.openProposalVerifiedModal = function(radicado) {
+  const modal = document.getElementById('proposal-verified-modal');
+  const radicadoEl = document.getElementById('verified-proposal-radicado');
+  const waBtn = document.getElementById('verified-proposal-wa-btn');
+  if (radicadoEl) radicadoEl.textContent = radicado || 'PROP-2026-8821-PAS';
+  if (waBtn) {
+    waBtn.href = `https://wa.me/573000000000?text=Hola%20Casa%20Guardian,%20he%20escaneado%20la%20propuesta%20${encodeURIComponent(radicado || '')}%20y%20deseo%20activar%20el%20servicio.`;
+  }
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+};
+
+window.closeProposalVerifiedModal = function() {
+  const modal = document.getElementById('proposal-verified-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+  }
+};
+
+window.checkUrlParamsOnLoad = function() {
+  let allParams = new URLSearchParams(window.location.search);
+
+  // Soporte para parámetros en el hash (ej. #verificador?doc=... o #propuesta=...)
+  const hashStr = window.location.hash || '';
+  if (hashStr.includes('?')) {
+    const hashQuery = hashStr.substring(hashStr.indexOf('?'));
+    const hashParams = new URLSearchParams(hashQuery);
+    hashParams.forEach((val, key) => allParams.set(key, val));
+  } else if (hashStr.includes('=')) {
+    const cleanHash = hashStr.replace('#', '');
+    const hashParams = new URLSearchParams(cleanHash);
+    hashParams.forEach((val, key) => allParams.set(key, val));
+  }
+
+  const propParam = allParams.get('propuesta') || allParams.get('proposal');
+  if (propParam) {
+    setTimeout(() => {
+      window.openProposalVerifiedModal(propParam);
+    }, 250);
+    return;
+  }
+
+  const docParam = allParams.get('doc') || allParams.get('hash');
+  if (docParam) {
+    if (typeof window.switchAppView === 'function') {
+      window.switchAppView('view-landing');
+    }
+
+    const scrollToVerifier = () => {
+      const verifierSec = document.getElementById('verificador');
+      if (verifierSec) {
+        verifierSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      if (typeof window.setDocSearchAndVerify === 'function') {
+        window.setDocSearchAndVerify(docParam);
+      }
+    };
+
+    // Múltiples disparos para garantizar que la carga de imágenes asíncronas no regrese la vista al home
+    setTimeout(scrollToVerifier, 150);
+    setTimeout(scrollToVerifier, 650);
+    setTimeout(scrollToVerifier, 1400);
+  }
+};
 
 // Listeners de inicialización DOM
 document.addEventListener('DOMContentLoaded', () => {
@@ -518,6 +587,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const propModal = document.getElementById('proposal-verified-modal');
+  if (propModal) {
+    propModal.addEventListener('click', (e) => {
+      if (e.target === propModal) closeProposalVerifiedModal();
+    });
+  }
+
   const docSearchInput = document.getElementById('public-doc-search-input');
   if (docSearchInput) {
     docSearchInput.addEventListener('keydown', (e) => {
@@ -528,20 +604,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Lectura automática de parámetro ?doc= o ?hash= al escanear QR desde smartphone
-  const urlParams = new URLSearchParams(window.location.search);
-  const docParam = urlParams.get('doc') || urlParams.get('hash');
-  if (docParam) {
-    setTimeout(() => {
-      const verifierSec = document.getElementById('verificador');
-      if (verifierSec) {
-        verifierSec.scrollIntoView({ behavior: 'smooth' });
-      }
-      if (typeof window.setDocSearchAndVerify === 'function') {
-        window.setDocSearchAndVerify(docParam);
-      }
-    }, 450);
-  }
+  // Detección de parámetros URL al cargar DOM
+  window.checkUrlParamsOnLoad();
+});
+
+// Re-verificación cuando todos los recursos gráficos hayan terminado de cargar
+window.addEventListener('load', () => {
+  window.checkUrlParamsOnLoad();
 });
 
 window.switchAuthTab = function(tab) {
@@ -956,7 +1025,7 @@ window.verifyPublicDocument = function(overrideQuery) {
   resultContainer.classList.remove('hidden');
 
   if (found) {
-    const verifyUrl = `https://casa-guardian.vercel.app/?doc=${encodeURIComponent(found.docId)}`;
+    const verifyUrl = `https://casa-guardian.vercel.app/?doc=${encodeURIComponent(found.docId)}#verificador`;
     const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}&bgcolor=ffffff&color=08182b&margin=2`;
 
     resultContainer.innerHTML = `
@@ -1222,7 +1291,7 @@ window.downloadCustodyProposal = function() {
   const vehicle = document.getElementById('calc-vehicle-care')?.selectedOptions[0]?.text || 'Ninguno';
   const today = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
   const radicado = `PROP-2026-${Math.floor(1000 + Math.random() * 9000)}-PAS`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent('https://casa-guardian.vercel.app/?propuesta=' + radicado)}&bgcolor=ffffff&color=08182b&margin=2`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent('https://casa-guardian.vercel.app/?propuesta=' + encodeURIComponent(radicado) + '#propuesta-verificada')}&bgcolor=ffffff&color=08182b&margin=2`;
 
   const proposalHtml = `
     <!DOCTYPE html>
