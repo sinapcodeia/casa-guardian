@@ -495,6 +495,7 @@ document.addEventListener('keydown', (e) => {
     closeAuthModal();
     closePrivacyModal();
     closeDemoReportModal();
+    if (typeof closeQrScannerModal === 'function') closeQrScannerModal();
     if (window.CasaGuardianOperator && typeof window.CasaGuardianOperator.closeInspectionTerminal === 'function') {
       window.CasaGuardianOperator.closeInspectionTerminal();
     }
@@ -510,6 +511,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  const qrModal = document.getElementById('qr-scanner-modal');
+  if (qrModal) {
+    qrModal.addEventListener('click', (e) => {
+      if (e.target === qrModal) closeQrScannerModal();
+    });
+  }
+
   const docSearchInput = document.getElementById('public-doc-search-input');
   if (docSearchInput) {
     docSearchInput.addEventListener('keydown', (e) => {
@@ -518,6 +526,21 @@ document.addEventListener('DOMContentLoaded', () => {
         window.verifyPublicDocument();
       }
     });
+  }
+
+  // Lectura automática de parámetro ?doc= o ?hash= al escanear QR desde smartphone
+  const urlParams = new URLSearchParams(window.location.search);
+  const docParam = urlParams.get('doc') || urlParams.get('hash');
+  if (docParam) {
+    setTimeout(() => {
+      const verifierSec = document.getElementById('verificador');
+      if (verifierSec) {
+        verifierSec.scrollIntoView({ behavior: 'smooth' });
+      }
+      if (typeof window.setDocSearchAndVerify === 'function') {
+        window.setDocSearchAndVerify(docParam);
+      }
+    }, 450);
   }
 });
 
@@ -933,8 +956,11 @@ window.verifyPublicDocument = function(overrideQuery) {
   resultContainer.classList.remove('hidden');
 
   if (found) {
+    const verifyUrl = `https://casa-guardian.vercel.app/?doc=${encodeURIComponent(found.docId)}`;
+    const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}&bgcolor=ffffff&color=08182b&margin=2`;
+
     resultContainer.innerHTML = `
-      <div class="p-5 sm:p-6 rounded-2xl bg-[#0B1E33] border border-emerald-500/40 shadow-2xl text-xs space-y-4">
+      <div class="p-5 sm:p-6 rounded-3xl bg-[#0B1E33] border border-emerald-500/40 shadow-2xl text-xs space-y-4 animate-fadeIn">
         <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
           <div class="flex items-center gap-2">
             <span class="material-symbols-outlined text-emerald-400 text-xl">verified</span>
@@ -945,36 +971,59 @@ window.verifyPublicDocument = function(overrideQuery) {
           </span>
         </div>
 
-        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
-          <div>
-            <span class="text-slate-400 text-[10px] uppercase font-bold block">Radicado & Categoría</span>
-            <span class="text-white font-bold text-sm">${found.docId}</span> · <span class="text-amber-300 font-medium">${found.category} (${found.version})</span>
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-5 items-center">
+          <!-- DATOS Y METADATOS DEL INSTRUMENTO (COL 8) -->
+          <div class="md:col-span-8 space-y-3.5">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-slate-300">
+              <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block">Radicado & Categoría</span>
+                <span class="text-white font-bold text-sm">${found.docId}</span> · <span class="text-amber-300 font-medium">${found.category} (${found.version})</span>
+              </div>
+              <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block">Titular / Inmueble</span>
+                <span class="text-white font-bold">${found.clientName}</span> <span class="text-slate-400 font-mono text-[11px]">(${found.clientRef})</span>
+              </div>
+              <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block">Fecha & Hora de Sellado</span>
+                <span class="text-white font-mono">${found.timestamp}</span>
+              </div>
+              <div>
+                <span class="text-slate-400 text-[10px] uppercase font-bold block">Jurisdicción & Notaría</span>
+                <span class="text-white">${found.jurisdiction}</span>
+              </div>
+            </div>
+
+            <div class="p-3 bg-black/50 rounded-xl border border-white/10 space-y-1">
+              <span class="text-slate-400 text-[10px] uppercase font-bold block font-mono">Sello Criptográfico SHA-256 (Inmutable)</span>
+              <div class="font-mono text-[11px] text-amber-300 break-all select-all font-semibold">
+                ${found.hash}
+              </div>
+              <div class="text-[10px] text-slate-400 pt-1 border-t border-white/10 mt-1">
+                ⚖️ ${found.compliance || 'Ley 527 de 1999 de Comercio Electrónico & Código General del Proceso Art. 243'}
+              </div>
+            </div>
           </div>
-          <div>
-            <span class="text-slate-400 text-[10px] uppercase font-bold block">Titular / Inmueble</span>
-            <span class="text-white font-bold">${found.clientName}</span> <span class="text-slate-400 font-mono text-[11px]">(${found.clientRef})</span>
-          </div>
-          <div>
-            <span class="text-slate-400 text-[10px] uppercase font-bold block">Fecha & Hora de Sellado</span>
-            <span class="text-white font-mono">${found.timestamp}</span>
-          </div>
-          <div>
-            <span class="text-slate-400 text-[10px] uppercase font-bold block">Jurisdicción & Notaría</span>
-            <span class="text-white">${found.jurisdiction}</span>
+
+          <!-- ESTAMPA DE CÓDIGO QR NOTARIAL (COL 4) -->
+          <div class="md:col-span-4 flex flex-col items-center justify-center p-3.5 rounded-2xl bg-white/5 border border-amber-400/30 text-center">
+            <div class="p-2 bg-white rounded-xl shadow-xl border border-amber-400/30 mb-2">
+              <img src="${qrImgUrl}" alt="QR Verificación ${found.docId}" class="w-28 h-28 object-contain" width="112" height="112" loading="lazy">
+            </div>
+            <span class="text-[10px] font-mono text-amber-300 font-bold tracking-wider uppercase">QR DE TRAZABILIDAD</span>
+            <span class="text-[9px] text-slate-400 mt-0.5">Escaneo Notarial con Smartphone</span>
+            <button 
+              type="button" 
+              onclick="copyVerifyUrl('${verifyUrl}', '${found.docId}')" 
+              id="btn-copy-url-${found.docId}" 
+              class="mt-2.5 px-3 py-1.5 bg-white/10 hover:bg-white/20 text-slate-200 hover:text-white rounded-lg text-[10px] font-mono transition-all flex items-center gap-1.5 cursor-pointer shadow-sm"
+            >
+              <span class="material-symbols-outlined text-xs text-amber-400">content_copy</span>
+              <span>Copiar Enlace Directo</span>
+            </button>
           </div>
         </div>
 
-        <div class="p-3 bg-black/50 rounded-xl border border-white/10 space-y-1">
-          <span class="text-slate-400 text-[10px] uppercase font-bold block font-mono">Sello Criptográfico SHA-256 (Inmutable)</span>
-          <div class="font-mono text-[11px] text-amber-300 break-all select-all font-semibold">
-            ${found.hash}
-          </div>
-          <div class="text-[10px] text-slate-400 pt-1 border-t border-white/10 mt-1">
-            ⚖️ ${found.compliance || 'Ley 527 de 1999 de Comercio Electrónico & Código General del Proceso Art. 243'}
-          </div>
-        </div>
-
-        <div class="flex flex-wrap items-center justify-between gap-3 pt-2">
+        <div class="flex flex-wrap items-center justify-between gap-3 pt-2 border-t border-white/10">
           <span class="text-[11px] text-slate-400">Certificado emitido bajo custodia de Casa Guardian en Pasto, Nariño.</span>
           <button 
             type="button" 
@@ -1002,6 +1051,22 @@ window.verifyPublicDocument = function(overrideQuery) {
   }
 };
 
+window.copyVerifyUrl = function(url, docId) {
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(url).then(() => {
+      const btn = document.getElementById(`btn-copy-url-${docId}`);
+      if (btn) {
+        btn.innerHTML = `<span class="material-symbols-outlined text-xs text-emerald-400">check</span><span>¡Enlace Copiado!</span>`;
+        setTimeout(() => {
+          btn.innerHTML = `<span class="material-symbols-outlined text-xs text-amber-400">content_copy</span><span>Copiar Enlace Directo</span>`;
+        }, 2000);
+      }
+    });
+  } else {
+    prompt("Copie el enlace de verificación:", url);
+  }
+};
+
 window.downloadFoundDoc = function(docId) {
   if (window.CasaGuardianDocs && typeof window.CasaGuardianDocs.getDocuments === 'function') {
     const doc = window.CasaGuardianDocs.getDocuments().find(d => d.docId === docId);
@@ -1010,4 +1075,137 @@ window.downloadFoundDoc = function(docId) {
     }
   }
 };
+
+/* ==========================================================================
+   ESCÁNER DE CÓDIGO QR NOTARIAL (CÁMARA / SUBIDA DE ARCHIVO)
+   ========================================================================== */
+let qrMediaStream = null;
+
+window.openQrScannerModal = function() {
+  const modal = document.getElementById('qr-scanner-modal');
+  if (modal) {
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
+  }
+};
+
+window.closeQrScannerModal = function() {
+  const modal = document.getElementById('qr-scanner-modal');
+  if (modal) {
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
+    stopCameraScan();
+  }
+};
+
+window.startCameraScan = function() {
+  const video = document.getElementById('qr-scanner-video');
+  const placeholder = document.getElementById('qr-scanner-placeholder');
+  const guide = document.getElementById('qr-scan-guide');
+
+  if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+    alert("Tu navegador no soporta acceso directo a la cámara. Puedes utilizar la opción de subir una foto del código QR.");
+    return;
+  }
+
+  navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } })
+    .then(stream => {
+      qrMediaStream = stream;
+      if (video) {
+        video.srcObject = stream;
+        video.classList.remove('hidden');
+        video.play();
+      }
+      if (placeholder) placeholder.classList.add('hidden');
+      if (guide) guide.classList.remove('hidden');
+
+      // Intentar detección automática con BarcodeDetector si está disponible en el navegador
+      if ('BarcodeDetector' in window) {
+        const barcodeDetector = new BarcodeDetector({ formats: ['qr_code'] });
+        const scanInterval = setInterval(() => {
+          if (!qrMediaStream) {
+            clearInterval(scanInterval);
+            return;
+          }
+          barcodeDetector.detect(video).then(barcodes => {
+            if (barcodes.length > 0) {
+              clearInterval(scanInterval);
+              const rawValue = barcodes[0].rawValue;
+              processQrScannedValue(rawValue);
+            }
+          }).catch(() => {});
+        }, 500);
+      }
+    })
+    .catch(err => {
+      console.warn("Acceso a cámara no concedido o no disponible:", err);
+      alert("No fue posible acceder a la cámara. Asegúrate de otorgar los permisos en tu navegador o sube una imagen del QR.");
+    });
+};
+
+window.stopCameraScan = function() {
+  if (qrMediaStream) {
+    qrMediaStream.getTracks().forEach(track => track.stop());
+    qrMediaStream = null;
+  }
+  const video = document.getElementById('qr-scanner-video');
+  const placeholder = document.getElementById('qr-scanner-placeholder');
+  const guide = document.getElementById('qr-scan-guide');
+  if (video) {
+    video.pause();
+    video.srcObject = null;
+    video.classList.add('hidden');
+  }
+  if (placeholder) placeholder.classList.remove('hidden');
+  if (guide) guide.classList.add('hidden');
+};
+
+function processQrScannedValue(rawText) {
+  closeQrScannerModal();
+  let code = rawText.trim();
+
+  // Si es una URL completa (ej. https://casa-guardian.vercel.app/?doc=DOC-NOT-001), extraer el parámetro
+  if (code.includes('doc=')) {
+    try {
+      const u = new URL(code);
+      code = u.searchParams.get('doc') || code;
+    } catch(e) {
+      const match = code.match(/doc=([^&]+)/);
+      if (match) code = match[1];
+    }
+  }
+
+  window.setDocSearchAndVerify(code);
+}
+
+window.handleQrFileUpload = function(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+
+  // Si BarcodeDetector está disponible, leer directamente del archivo
+  if ('BarcodeDetector' in window) {
+    const img = new Image();
+    img.onload = () => {
+      const detector = new BarcodeDetector({ formats: ['qr_code'] });
+      detector.detect(img).then(barcodes => {
+        if (barcodes.length > 0) {
+          processQrScannedValue(barcodes[0].rawValue);
+        } else {
+          fallbackManualDocPrompt();
+        }
+      }).catch(() => fallbackManualDocPrompt());
+    };
+    img.src = URL.createObjectURL(file);
+  } else {
+    fallbackManualDocPrompt();
+  }
+};
+
+function fallbackManualDocPrompt() {
+  closeQrScannerModal();
+  const manual = prompt("📷 Imagen cargada. Escribe el número de radicado del acta para validar en la bóveda (ej. DOC-NOT-001):", "DOC-NOT-001");
+  if (manual && manual.trim() !== '') {
+    window.setDocSearchAndVerify(manual.trim());
+  }
+}
 

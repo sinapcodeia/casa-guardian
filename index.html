@@ -672,6 +672,15 @@
               <span class="material-symbols-outlined text-base">verified</span>
               <span>Validar Acta</span>
             </button>
+            <button 
+              type="button" 
+              onclick="openQrScannerModal()" 
+              class="px-4 py-2.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer shadow-md"
+              aria-label="Escanear Código QR con Cámara"
+            >
+              <span class="material-symbols-outlined text-base text-amber-400">qr_code_scanner</span>
+              <span>Escanear QR</span>
+            </button>
           </div>
 
           <!-- CHIPS DE EJEMPLO -->
@@ -1753,6 +1762,47 @@
         <button type="button" onclick="closeDemoReportModal(); scrollToSection('calculadora');" class="btn bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-300 hover:to-amber-500 text-slate-950 font-black px-6 py-2.5 rounded-xl text-xs transition-all flex items-center gap-2 cursor-pointer shadow-lg">
           <span class="material-symbols-outlined text-sm">calculate</span>
           <span>Cotizar mi Plan Ahora</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       MODAL DE ESCÁNER DE CÓDIGO QR NOTARIAL
+       ========================================================================== -->
+  <div class="modal-overlay" id="qr-scanner-modal" role="dialog" aria-modal="true" aria-labelledby="qr-scanner-title">
+    <div class="modal-container max-w-md w-full bg-[#08182B] border border-amber-400/30 rounded-3xl p-6 sm:p-8 shadow-2xl relative text-white text-center">
+      <button class="modal-close" onclick="closeQrScannerModal()" aria-label="Cerrar Escáner">&times;</button>
+
+      <div class="w-12 h-12 rounded-2xl bg-amber-400/10 border border-amber-400/30 flex items-center justify-center text-amber-400 text-2xl mx-auto mb-3 shadow-lg">
+        <span class="material-symbols-outlined">qr_code_scanner</span>
+      </div>
+
+      <h3 class="text-xl font-extrabold text-white" id="qr-scanner-title">Escanear QR de Acta Notarial</h3>
+      <p class="text-xs text-slate-300 mt-1 mb-5">Apunta con la cámara de tu dispositivo al QR impreso en el acta o carga una imagen del documento.</p>
+
+      <!-- VISOR DE CÁMARA O ÁREA DE CARGA -->
+      <div class="relative w-full aspect-square max-w-[260px] mx-auto rounded-2xl overflow-hidden border-2 border-dashed border-amber-400/40 bg-black/60 flex flex-col items-center justify-center p-4 mb-4">
+        <video id="qr-scanner-video" class="w-full h-full object-cover hidden" playsinline></video>
+        <div id="qr-scanner-placeholder" class="flex flex-col items-center justify-center text-slate-400 text-center gap-2">
+          <span class="material-symbols-outlined text-4xl text-amber-400/60 animate-pulse">photo_camera</span>
+          <span class="text-xs font-semibold">Cámara lista para activar</span>
+          <button type="button" onclick="startCameraScan()" id="btn-start-camera" class="mt-2 px-4 py-2 bg-amber-400 text-slate-950 font-bold text-xs rounded-xl shadow-md cursor-pointer hover:bg-amber-300">
+            Activar Cámara
+          </button>
+        </div>
+        <div id="qr-scan-guide" class="absolute inset-4 border-2 border-amber-400/60 rounded-xl pointer-events-none hidden">
+          <div class="absolute inset-x-0 top-0 h-0.5 bg-amber-400 shadow-[0_0_8px_#f59e0b] animate-pulse"></div>
+        </div>
+      </div>
+
+      <!-- OPCIÓN ALTERNATIVA: SUBIR FOTO -->
+      <div class="border-t border-white/10 pt-4">
+        <label class="block text-[11px] text-slate-400 mb-2">¿Tienes una foto o captura del QR?</label>
+        <input type="file" id="qr-file-input" accept="image/*" class="hidden" onchange="handleQrFileUpload(event)">
+        <button type="button" onclick="document.getElementById('qr-file-input').click()" class="w-full py-2.5 bg-white/5 hover:bg-white/15 border border-white/15 text-slate-200 font-bold text-xs rounded-xl transition-all flex items-center justify-center gap-2 cursor-pointer">
+          <span class="material-symbols-outlined text-base">upload_file</span>
+          <span>Cargar Foto con Código QR</span>
         </button>
       </div>
     </div>
