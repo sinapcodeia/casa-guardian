@@ -58,7 +58,7 @@ function initViewSwitcher() {
   });
 }
 
-window.switchAppView = function(targetViewId) {
+window.switchAppView = function(targetViewId, options = {}) {
   // CONTROL DE ACCESO ESTRICTO: Si intenta acceder a view-dashboard sin autenticación
   if (targetViewId === 'view-dashboard') {
     const isOwnerAuth = sessionStorage.getItem('casaguardian_owner_authenticated') === 'true';
@@ -100,7 +100,9 @@ window.switchAppView = function(targetViewId) {
     window.CasaGuardianAdmin.checkAdminSession();
   }
 
-  window.scrollTo({ top: 0, behavior: 'instant' });
+  if (!options.preserveScroll) {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }
 };
 
 /* --------------------------------------------------------------------------
@@ -503,6 +505,8 @@ document.addEventListener('keydown', (e) => {
   }
 });
 
+let hasProcessedUrlParams = false;
+
 window.openProposalVerifiedModal = function(radicado) {
   const modal = document.getElementById('proposal-verified-modal');
   const radicadoEl = document.getElementById('verified-proposal-radicado');
@@ -514,6 +518,7 @@ window.openProposalVerifiedModal = function(radicado) {
   if (modal) {
     modal.classList.add('active');
     modal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('overflow-hidden');
   }
 };
 
@@ -522,52 +527,51 @@ window.closeProposalVerifiedModal = function() {
   if (modal) {
     modal.classList.remove('active');
     modal.setAttribute('aria-hidden', 'true');
+    document.body.classList.remove('overflow-hidden');
   }
 };
 
 window.checkUrlParamsOnLoad = function() {
-  let allParams = new URLSearchParams(window.location.search);
+  // Garantizar ejecución única y evitar ciclos de re-scroll o parpadeos
+  if (hasProcessedUrlParams) return;
 
-  // Soporte para parámetros en el hash (ej. #verificador?doc=... o #propuesta=...)
+  const urlParams = new URLSearchParams(window.location.search);
   const hashStr = window.location.hash || '';
+
   if (hashStr.includes('?')) {
     const hashQuery = hashStr.substring(hashStr.indexOf('?'));
     const hashParams = new URLSearchParams(hashQuery);
-    hashParams.forEach((val, key) => allParams.set(key, val));
-  } else if (hashStr.includes('=')) {
-    const cleanHash = hashStr.replace('#', '');
-    const hashParams = new URLSearchParams(cleanHash);
-    hashParams.forEach((val, key) => allParams.set(key, val));
+    hashParams.forEach((val, key) => {
+      if (!urlParams.has(key)) urlParams.set(key, val);
+    });
   }
 
-  const propParam = allParams.get('propuesta') || allParams.get('proposal');
+  const propParam = urlParams.get('propuesta') || urlParams.get('proposal');
+  const docParam = urlParams.get('doc') || urlParams.get('hash');
+
   if (propParam) {
+    hasProcessedUrlParams = true;
     setTimeout(() => {
       window.openProposalVerifiedModal(propParam);
-    }, 250);
+    }, 150);
     return;
   }
 
-  const docParam = allParams.get('doc') || allParams.get('hash');
   if (docParam) {
-    if (typeof window.switchAppView === 'function') {
-      window.switchAppView('view-landing');
+    hasProcessedUrlParams = true;
+
+    // Renderizar de inmediato el acta certificada
+    if (typeof window.setDocSearchAndVerify === 'function') {
+      window.setDocSearchAndVerify(docParam);
     }
 
-    const scrollToVerifier = () => {
+    // Un único desplazamiento suave y amortiguado sin sobresaltos
+    setTimeout(() => {
       const verifierSec = document.getElementById('verificador');
       if (verifierSec) {
         verifierSec.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }
-      if (typeof window.setDocSearchAndVerify === 'function') {
-        window.setDocSearchAndVerify(docParam);
-      }
-    };
-
-    // Múltiples disparos para garantizar que la carga de imágenes asíncronas no regrese la vista al home
-    setTimeout(scrollToVerifier, 150);
-    setTimeout(scrollToVerifier, 650);
-    setTimeout(scrollToVerifier, 1400);
+    }, 250);
   }
 };
 
@@ -604,12 +608,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Detección de parámetros URL al cargar DOM
-  window.checkUrlParamsOnLoad();
-});
-
-// Re-verificación cuando todos los recursos gráficos hayan terminado de cargar
-window.addEventListener('load', () => {
+  // Detección de parámetros URL una sola vez al cargar la app
   window.checkUrlParamsOnLoad();
 });
 
@@ -1025,7 +1024,7 @@ window.verifyPublicDocument = function(overrideQuery) {
   resultContainer.classList.remove('hidden');
 
   if (found) {
-    const verifyUrl = `https://casa-guardian.vercel.app/?doc=${encodeURIComponent(found.docId)}#verificador`;
+    const verifyUrl = `https://casa-guardian.vercel.app/?doc=${encodeURIComponent(found.docId)}`;
     const qrImgUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(verifyUrl)}&bgcolor=ffffff&color=08182b&margin=2`;
 
     resultContainer.innerHTML = `
@@ -1291,7 +1290,7 @@ window.downloadCustodyProposal = function() {
   const vehicle = document.getElementById('calc-vehicle-care')?.selectedOptions[0]?.text || 'Ninguno';
   const today = new Date().toLocaleDateString('es-CO', { year: 'numeric', month: 'long', day: 'numeric' });
   const radicado = `PROP-2026-${Math.floor(1000 + Math.random() * 9000)}-PAS`;
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent('https://casa-guardian.vercel.app/?propuesta=' + encodeURIComponent(radicado) + '#propuesta-verificada')}&bgcolor=ffffff&color=08182b&margin=2`;
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=130x130&data=${encodeURIComponent('https://casa-guardian.vercel.app/?propuesta=' + encodeURIComponent(radicado))}&bgcolor=ffffff&color=08182b&margin=2`;
 
   const proposalHtml = `
     <!DOCTYPE html>
