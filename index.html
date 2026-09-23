@@ -1187,7 +1187,12 @@
 
           <div>
             <label class="block text-xs font-bold text-slate-300 uppercase tracking-wider mb-1.5" for="admin-pass">Clave de Seguridad</label>
-            <input type="password" id="admin-pass" placeholder="••••••••••••" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-sm text-white focus:outline-none focus:border-amber-400" required />
+            <div class="relative">
+              <input type="password" id="admin-pass" placeholder="••••••••••••" autocomplete="current-password" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 pr-11 text-sm text-white focus:outline-none focus:border-amber-400" required />
+              <button type="button" onclick="togglePasswordVisibility('admin-pass', 'admin-pass-icon')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-400 transition-colors p-1 cursor-pointer focus:outline-none" aria-label="Mostrar u ocultar clave">
+                <span class="material-symbols-outlined text-lg align-middle" id="admin-pass-icon">visibility</span>
+              </button>
+            </div>
           </div>
 
           <div id="admin-login-error" class="hidden text-xs text-red-400 font-bold bg-red-950/60 p-2.5 rounded-lg border border-red-800">
@@ -1478,7 +1483,12 @@
               ¿Olvidaste tu clave?
             </button>
           </div>
-          <input type="password" id="login-pass" placeholder="••••••••••••" autocomplete="current-password" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 text-xs text-white focus:outline-none focus:border-amber-400" required />
+          <div class="relative">
+            <input type="password" id="login-pass" placeholder="••••••••••••" autocomplete="current-password" class="w-full bg-slate-800 border border-slate-700 rounded-xl px-3.5 py-2.5 pr-11 text-xs text-white focus:outline-none focus:border-amber-400" required />
+            <button type="button" onclick="togglePasswordVisibility('login-pass', 'login-pass-icon')" class="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-amber-400 transition-colors p-1 cursor-pointer focus:outline-none" aria-label="Mostrar u ocultar clave">
+              <span class="material-symbols-outlined text-base align-middle" id="login-pass-icon">visibility</span>
+            </button>
+          </div>
         </div>
 
         <button type="submit" class="w-full py-3 bg-gradient-to-r from-cyan-500 to-cyan-600 hover:from-cyan-400 hover:to-cyan-500 text-slate-950 text-xs font-extrabold rounded-xl shadow-lg shadow-cyan-500/20 transition-all">
